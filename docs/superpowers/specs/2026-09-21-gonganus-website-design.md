@@ -52,7 +52,7 @@ frontmatter 필드: `title`, `category`, `year`, `location`(선택), `summary`(1
 ## 4. 디자인 시스템
 
 - 색: 배경 #FFFFFF, 본문 #111111, 보조 #6B6B6B, 선 #E5E5E5. 강조색 없음.
-- 글꼴: 본문 Pretendard(로컬 woff2, 400/500), 제목·영문 세리프는 로고와 어울리는 웹폰트 1종(Cormorant 계열 또는 시스템 세리프). 웹폰트 총 2종 이내.
+- 글꼴: 본문 Pretendard(로컬 woff2, 400/500), 제목·영문 세리프는 Cormorant Garamond(로컬 woff2, 400/500). 웹폰트 총 2종.
 - 레이아웃: 최대 폭 1440px, 좌우 여백 데스크톱 48px / 모바일 20px. 그리드 데스크톱 3열, 태블릿 2열, 모바일 1열. 사진 비율은 원본 유지(썸네일은 4:3 고정 크롭).
 - 헤더: 좌측 로고(높이 28px), 우측 메뉴 5개(Work · Video · Services · About · Contact). 모바일은 햄버거 → 전체화면 메뉴.
 - 푸터: 상호, 이메일, 인스타그램, 카카오톡 링크, 저작권.
@@ -70,7 +70,7 @@ frontmatter 필드: `title`, `category`, `year`, `location`(선택), `summary`(1
 ## 6. 검색·AI 노출(SEO) 기본 내장
 
 - 페이지별 고유 `<title>`, `meta description`, canonical, OG/Twitter 카드(프로젝트는 대표 사진).
-- JSON-LD: 전체 `ProfessionalService`(상호, 지역 서울, 연락처, SNS sameAs), 프로젝트 페이지 `ImageGallery`, About `AboutPage`.
+- JSON-LD: 전체 `ProfessionalService`(상호, 활동 지역 서울·수도권 전국 출장, 연락처, SNS sameAs), 프로젝트 페이지 `ImageGallery`, About `AboutPage`.
 - `sitemap-index.xml` 자동 생성, `robots.txt`(전체 허용 + AI 크롤러 허용), `llms.txt`(스튜디오 소개·서비스·연락처 요약).
 - 구글 서치콘솔·네이버 서치어드바이저 인증 meta 자리(`site.config.ts`에 값만 넣으면 출력).
 - 이미지 파일명에 프로젝트명 포함, alt 텍스트 규칙 적용.
