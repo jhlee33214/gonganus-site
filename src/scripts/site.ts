@@ -13,6 +13,7 @@ let lenis: Lenis | null = null;
 function smooth() {
   if (reduced || lenis) return;
   lenis = new Lenis({ lerp: 0.09, wheelMultiplier: 1, touchMultiplier: 1.4 });
+  (window as any).__lenis = lenis;
   lenis.scrollTo(0, { immediate: true });
   const raf = (t: number) => { lenis!.raf(t); requestAnimationFrame(raf); };
   requestAnimationFrame(raf);
