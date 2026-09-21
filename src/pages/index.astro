@@ -9,7 +9,7 @@ import { siteConfig } from '../site.config';
 import { getAllWork, getFeaturedWork, getCover, workUrl } from '../lib/work';
 const all = await getAllWork();
 const featured = await getFeaturedWork(7);
-const hero = all[0];
+const hero = all.find((w) => w.id === 'stay-namyangju-damyeonjae') ?? all[0];
 const heroImage = getCover(hero.id, hero.data.cover);
 const clients = ['Knoll', 'Duomo Lighting', 'Knotty', 'OODOOD', 'Y3S', '프뤼떼마지', '마조리카', '모모란위그', '온휴스파', '그리디센트', '그린보이즈', '오션키즈', '담연재', '안월재', 'Mukta'];
 const strengths = [

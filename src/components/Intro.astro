@@ -1,6 +1,6 @@
 ---
 // 첫 방문 인트로: 로고의 원이 그려지고 글자가 떠오른 뒤 화면이 위로 걷힌다. 세션당 1회, 모션 줄이기 설정 시 생략.
-import Logo from '../assets/logo-header.svg';
+import Logo from '../assets/logo-intro.svg';
 ---
 <div id="intro" aria-hidden="true">
   <div class="intro-inner"><Logo class="intro-logo" /></div>
@@ -11,10 +11,11 @@ import Logo from '../assets/logo-header.svg';
     try { skip = sessionStorage.getItem('gonganus-intro') === '1'; } catch (e) {}
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) skip = true;
     var el = document.getElementById('intro');
-    if (skip) { el && el.remove(); return; }
+    if (skip) { el && el.remove(); document.addEventListener('astro:before-swap', function (e) { var n = e.newDocument.getElementById('intro'); if (n) n.remove(); }); return; }
     document.documentElement.classList.add('intro-on');
     try { sessionStorage.setItem('gonganus-intro', '1'); } catch (e) {}
-    setTimeout(function () { el && el.remove(); document.documentElement.classList.remove('intro-on'); }, 2500);
+    setTimeout(function () { el && el.remove(); document.documentElement.classList.remove('intro-on'); }, 2600);
+    document.addEventListener('astro:before-swap', function (e) { var n = e.newDocument.getElementById('intro'); if (n) n.remove(); });
   })();
 </script>
 <style is:global>
