@@ -1,6 +1,6 @@
 ---
 import { siteConfig, nav } from '../site.config';
-import Logo from '../assets/logo.svg';
+import Logo from '../assets/logo-footer.svg';
 ---
 <footer class="footer dark">
   <div class="container">
@@ -17,20 +17,23 @@ import Logo from '../assets/logo.svg';
         <li><a href={siteConfig.kakao} target="_blank" rel="noopener">KakaoTalk</a></li>
       </ul>
     </div>
-    <Logo class="wordmark" />
+    <div class="mark" data-reveal="logo"><Logo class="wordmark" /></div>
     <div class="bottom muted">
-      <span>{siteConfig.name} · {siteConfig.areaServed}</span>
+      <span>{siteConfig.name} {siteConfig.nameEn} studio</span>
       <span>© {new Date().getFullYear()} {siteConfig.nameEn}</span>
     </div>
   </div>
 </footer>
 <style>
-  .footer { padding: 72px 0 28px; }
-  .top { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 32px; align-items: start; }
+  .footer { padding: 56px 0 24px; }
+  .top { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 24px; align-items: start; }
   .mail { font-size: clamp(20px, 2.2vw, 30px); font-weight: 500; letter-spacing: -0.02em; }
   .links { font-size: 14px; font-weight: 500; }
   .links li + li { margin-top: 8px; }
-  .wordmark { width: min(46vw, 620px); height: auto; margin: 72px auto 48px 0; filter: invert(1); opacity: .95; }
-  .bottom { display: flex; justify-content: space-between; gap: 16px; font-size: 12px; border-top: 1px solid var(--line); padding-top: 20px; }
-  @media (max-width: 640px) { .top { grid-template-columns: 1fr 1fr; } .top > div:first-child { grid-column: 1 / -1; } .wordmark { width: 80vw; } .bottom { flex-direction: column; } }
+  .mark { margin: 40px 0 28px; }
+  .wordmark { width: min(22vw, 220px); height: auto; color: #f2f2f0; }
+  .wordmark :global(.word use), .wordmark :global(.word path) { fill: #f2f2f0 !important; }
+  .wordmark :global(.rings) { stroke: #f2f2f0; }
+  .bottom { display: flex; justify-content: space-between; gap: 16px; font-size: 12px; border-top: 1px solid var(--line); padding-top: 16px; }
+  @media (max-width: 640px) { .top { grid-template-columns: 1fr 1fr; } .top > div:first-child { grid-column: 1 / -1; } .wordmark { width: 44vw; } .bottom { flex-direction: column; } }
 </style>

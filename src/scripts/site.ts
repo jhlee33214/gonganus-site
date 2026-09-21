@@ -62,14 +62,14 @@ function cursor() {
   if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
   let c = document.getElementById('cursor');
   if (!c) {
-    c = document.createElement('div'); c.id = 'cursor'; c.textContent = 'View'; document.body.appendChild(c);
+    c = document.createElement('div'); c.id = 'cursor'; c.textContent = 'View ↗'; document.body.appendChild(c);
     let x = 0, y = 0, cx = 0, cy = 0;
     window.addEventListener('mousemove', (e) => { x = e.clientX; y = e.clientY; }, { passive: true });
     const loop = () => { cx += (x - cx) * 0.18; cy += (y - cy) * 0.18; c!.style.transform = `translate(${cx}px, ${cy}px) translate(-50%, -50%)`; requestAnimationFrame(loop); };
     loop();
   }
   document.querySelectorAll<HTMLElement>('[data-cursor]').forEach((el) => {
-    el.addEventListener('mouseenter', () => { c!.textContent = el.dataset.cursor || 'View'; c!.classList.add('on'); });
+    el.addEventListener('mouseenter', () => { c!.textContent = el.dataset.cursor || 'View ↗'; c!.classList.add('on'); });
     el.addEventListener('mouseleave', () => c!.classList.remove('on'));
   });
 }

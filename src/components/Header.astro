@@ -1,6 +1,6 @@
 ---
 import { siteConfig, nav } from '../site.config';
-import Logo from '../assets/logo-mark.svg';
+import Logo from '../assets/logo-word.svg';
 const path = Astro.url.pathname;
 ---
 <header class="header" id="site-header">
@@ -37,7 +37,7 @@ const path = Astro.url.pathname;
   .header.hidden { transform: translateY(-100%); }
   .bar { display: flex; align-items: center; justify-content: space-between; height: 72px; }
   .brand { display: block; line-height: 0; }
-  .logo { height: 40px; width: auto; }
+  .logo { height: 24px; width: auto; }
   .nav { display: flex; gap: 34px; font-size: 14px; font-weight: 500; letter-spacing: .01em; }
   .nav a { position: relative; padding: 4px 0; }
   .nav a::after { content: ''; position: absolute; left: 0; bottom: 0; width: 100%; height: 1px; background: var(--fg); transform: scaleX(0); transform-origin: right; transition: transform .4s var(--ease); }

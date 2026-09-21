@@ -6,7 +6,7 @@ const { work, eager = false, ratio = '4/3', sizes = '(max-width: 640px) 100vw, (
 const cover = getCover(work.id, work.data.cover);
 const [rw, rh] = ratio.split('/').map(Number);
 ---
-<a class="card" href={workUrl(work)} data-cursor="View">
+<a class="card" href={workUrl(work)} data-cursor="View ↗">
   <div class="thumb" style={`aspect-ratio:${rw}/${rh}`} data-reveal="wipe" transition:name={`cover-${work.id}`}>
     <Image src={cover} alt={`${work.data.title} 공간 사진`} widths={[480, 960, 1440, 1920]} sizes={sizes} width={1920} height={Math.round(1920 * rh / rw)} loading={eager ? 'eager' : 'lazy'} />
   </div>

@@ -17,11 +17,10 @@ const strengths = [
   { t: '촬영 후 5일 안에 납품', d: '한 번에 한 공간에만 집중합니다. 보정과 편집을 마친 완성본을 촬영 후 5일 안에 전달합니다.' },
   { t: '공간에 맞는 견적', d: '보정을 마친 사진 30장 이상과 2분 이내의 영상을 기본으로, 공간과 용도에 맞춰 견적을 드립니다.' },
 ];
-const stats = [
-  { n: all.length, s: '', l: '기록한 공간' },
-  { n: 5, s: '일', l: '촬영 후 납품' },
-  { n: 30, s: '+', l: '보정 사진 기본' },
-  { n: 2, s: '분', l: '영상 편집본' },
+const services = [
+  { n: '01', t: '공간 사진', d: '수직과 원근을 정리하고 조명 색을 맞춘 인테리어 사진. 보정을 마친 30장 이상.' },
+  { n: '02', t: '공간 영상', d: '동선과 빛을 따라가는 짧은 영상. 릴스·쇼츠용 세로, 웹·유튜브용 가로 포맷.' },
+  { n: '03', t: '사진 + 영상 패키지', d: '한 번의 방문으로 두 결과물을 같은 빛, 같은 톤으로. 가장 많이 선택하는 방식.' },
 ];
 ---
 <Base title="공간어스 | 인테리어·공간 사진 영상 촬영 스튜디오" description={siteConfig.description}>
@@ -65,8 +64,8 @@ const stats = [
         <h2 data-reveal="line"><Words text="결과물이 다른 이유" /></h2>
         <p class="lead muted" data-reveal>보기 좋은 사진보다 정확한 사진을 목표로 합니다. 설계자가 고른 마감재의 색, 조명의 온도, 창으로 들어오는 빛이 실제와 같아야 합니다.</p>
       </div>
-      <ul class="stats stagger">
-        {stats.map((s) => <li data-reveal><strong><span data-count={s.n} data-suffix={s.s}>0{s.s}</span></strong><span class="muted">{s.l}</span></li>)}
+      <ul class="svc stagger">
+        {services.map((s) => <li data-reveal><a href="/services/"><span class="num">{s.n}</span><h3>{s.t}</h3><p class="muted">{s.d}</p><span class="arrow">→</span></a></li>)}
       </ul>
       <ul class="strengths stagger">
         {strengths.map((s, i) => <li data-reveal><span class="num">0{i + 1}</span><h3>{s.t}</h3><p class="muted">{s.d}</p></li>)}
@@ -90,9 +89,9 @@ const stats = [
   .hero-media img { width: 100%; height: 100%; object-fit: cover; transform: scale(1.16); will-change: transform; animation: kb 1.8s var(--ease) both; }
   @keyframes kb { from { transform: scale(1.3); opacity: 0; } }
   .hero-media::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,.4) 0%, rgba(0,0,0,.05) 40%, rgba(0,0,0,.62) 100%), radial-gradient(120% 90% at 50% 40%, transparent 55%, rgba(0,0,0,.45) 100%); }
-  .hero-content { position: relative; width: 100%; padding-top: 140px; padding-bottom: clamp(36px, 6vw, 80px); }
+  .hero-content { position: relative; width: 100%; padding-top: 140px; padding-bottom: clamp(40px, 7vw, 96px); max-width: var(--max); }
   .hero-eyebrow { color: rgba(255,255,255,.75); margin-bottom: 22px; opacity: 0; animation: fadeup 1s var(--ease) .5s forwards; }
-  .display { font-size: clamp(40px, 8.5vw, 136px); line-height: 1.0; letter-spacing: -0.04em; font-weight: 500; }
+  .display { font-size: clamp(36px, 6.2vw, 96px); line-height: 1.04; letter-spacing: -0.035em; font-weight: 500; }
   .line { display: block; overflow: hidden; padding-bottom: .06em; margin-bottom: -.06em; }
   .line > span { display: block; transform: translateY(110%); animation: rise 1.2s var(--ease) .25s forwards; }
   .line:nth-child(2) > span { animation-delay: .38s; }
@@ -115,9 +114,16 @@ const stats = [
 
   .head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 40px; gap: 24px; }
   .intro { display: grid; gap: 20px; max-width: 760px; }
-  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 40px 0; margin: clamp(40px, 6vw, 80px) 0; }
-  .stats strong { display: block; font-size: clamp(40px, 5.5vw, 88px); font-weight: 500; letter-spacing: -0.05em; line-height: 1; margin-bottom: 10px; font-variant-numeric: tabular-nums; }
-  .stats span { font-size: 14px; }
+  .svc { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border-top: 1px solid var(--line); margin: clamp(40px, 6vw, 80px) 0; }
+  .svc li { border-bottom: 1px solid var(--line); }
+  .svc li + li { border-left: 1px solid var(--line); }
+  .svc a { display: grid; gap: 12px; padding: 32px 28px 36px; height: 100%; position: relative; transition: background .5s var(--ease); }
+  .svc a:hover { background: #151514; }
+  .svc h3 { font-size: 22px; letter-spacing: -0.02em; }
+  .svc p { font-size: 15px; max-width: 26em; }
+  .svc .arrow { position: absolute; right: 28px; top: 30px; font-size: 18px; transition: transform .5s var(--ease); }
+  .svc a:hover .arrow { transform: translateX(6px); }
+  .svc li:first-child a { padding-left: 0; }
   .strengths { display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px 32px; }
   .strengths li { border-top: 1px solid var(--line); padding-top: 22px; }
   .num { display: block; font-size: 12px; color: var(--muted); margin-bottom: 14px; letter-spacing: .08em; }
@@ -125,15 +131,15 @@ const stats = [
   .strengths p { font-size: 15px; }
   .principles { display: grid; gap: 24px; }
   .principles h2 { font-size: clamp(28px, 4.2vw, 64px); max-width: 16em; }
-  @media (max-width: 1024px) { .strengths, .stats { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 1024px) { .strengths { grid-template-columns: repeat(2, 1fr); } .svc { grid-template-columns: 1fr; } .svc li + li { border-left: 0; } .svc a, .svc li:first-child a { padding: 24px 0 28px; } .svc .arrow { right: 0; top: 24px; } }
   @media (max-width: 768px) {
     .hero { min-height: 92svh; }
     .hero-row { flex-direction: column; align-items: flex-start; gap: 20px; }
     .hero-row .lead { font-size: 16px; }
-    .display { font-size: clamp(38px, 11vw, 56px); }
+    .display { font-size: clamp(34px, 9.5vw, 46px); }
     .scroll-hint { display: none; }
     .head { flex-direction: column; align-items: flex-start; gap: 12px; }
   }
-  @media (max-width: 640px) { .strengths { grid-template-columns: 1fr; gap: 28px; } .stats { gap: 24px 16px; padding: 28px 0; } }
+  @media (max-width: 640px) { .strengths { grid-template-columns: 1fr; gap: 28px; } }
   @media (prefers-reduced-motion: reduce) { .line > span, .hero-row, .hero-eyebrow, .hero-caption, .hero-media img { animation: none; transform: none; opacity: 1; } }
 </style>
