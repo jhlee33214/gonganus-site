@@ -2,6 +2,7 @@
 import { Image } from 'astro:assets';
 import Base from '../../layouts/Base.astro';
 import Cta from '../../components/Cta.astro';
+import Sentences from '../../components/Sentences.astro';
 import { siteConfig } from '../../site.config';
 import { getAllWork, getAdjacent, getProjectImages, CATEGORIES, categoryUrl, workUrl, getCover } from '../../lib/work';
 export async function getStaticPaths() {
@@ -52,7 +53,7 @@ const jsonLd = [{
         <div class="sticky" data-reveal>
           <p class="eyebrow"><a href={categoryUrl(d.category)}>{cat.label}</a></p>
           <h1>{d.title}</h1>
-          <p class="summary muted">{d.summary}</p>
+          <p class="summary muted"><Sentences text={d.summary} /></p>
           <dl class="facts">
             <div><dt>Year</dt><dd>{d.year}</dd></div>
             {d.location && <div><dt>Location</dt><dd>{d.location}</dd></div>}

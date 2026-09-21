@@ -1,0 +1,6 @@
+---
+// 문장이 끝나는 곳(., !, ?)에서만 줄을 바꾼다. 문장 중간에서 끊기는 줄바꿈을 막기 위한 공통 부품.
+interface Props { text: string; }
+const parts = Astro.props.text.split(/(?<=[.!?])\s+/).filter(Boolean);
+---
+{parts.map((p, i) => <>{p}{i < parts.length - 1 && <br />}</>)}

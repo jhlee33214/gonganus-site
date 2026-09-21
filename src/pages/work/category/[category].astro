@@ -2,6 +2,7 @@
 import Base from '../../../layouts/Base.astro';
 import WorkGrid from '../../../components/WorkGrid.astro';
 import Cta from '../../../components/Cta.astro';
+import Sentences from '../../../components/Sentences.astro';
 import { getAllWork, CATEGORIES, categoryUrl, type CategoryKey } from '../../../lib/work';
 export async function getStaticPaths() {
   const all = await getAllWork();
@@ -18,7 +19,7 @@ const cats = Object.entries(CATEGORIES) as [CategoryKey, { label: string }][];
   <section class="section">
     <div class="container">
       <h1 data-reveal>{cat.label}</h1>
-      <p class="lead muted" style="margin-top:12px">{cat.description}</p>
+      <p class="lead muted" style="margin-top:12px"><Sentences text={cat.description} /></p>
       <nav class="cats" aria-label="분류">
         <a href="/work/">전체 <span class="muted">{all.length}</span></a>
         {cats.map(([k, c]) => { const n = all.filter((w) => w.data.category === k).length; return n ? <a href={categoryUrl(k)} aria-current={k === category ? 'page' : undefined}>{c.label} <span class="muted">{n}</span></a> : null; })}

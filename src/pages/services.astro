@@ -1,9 +1,10 @@
 ---
 import Base from '../layouts/Base.astro';
 import Cta from '../components/Cta.astro';
+import Sentences from '../components/Sentences.astro';
 const services = [
-  { t: '공간 사진', d: '설계된 구조와 마감의 디테일을 정확하게 담습니다. 수직을 세우고, 조명의 색을 정리하고, 창밖 풍경까지 살립니다.', out: ['컷 수 제한 없음. 공간의 장면을 최대한 많이 기록', '전 컷 보정 후 웹·인스타그램·인쇄용 크기로 각각 전달', '촬영 후 5일 이내 납품'] },
-  { t: '공간 영상', d: '공간의 동선과 빛의 변화를 따라가는 짧은 영상입니다. 릴스·쇼츠용 세로와 웹·유튜브용 가로 중 용도에 맞는 포맷을 선택해 편집합니다.', out: ['색보정·편집을 마친 완성본 (릴스·쇼츠 15~60초, 웹·유튜브 1~2분)', '세로 9:16 또는 가로 16:9 중 선택', '로고 삽입본과 미삽입본 함께 전달'] },
+  { t: '공간 사진', d: '설계된 구조와 마감의 디테일을 정확하게 담습니다. 수직을 세우고, 조명의 색을 정리하고, 창밖 풍경까지 살립니다.', out: ['컷 수 제한 없음. 공간의 장면을 최대한 많이 기록', '전 컷 보정을 마친 완성본으로 전달', '촬영 후 5일 이내 납품'] },
+  { t: '공간 영상', d: '공간의 동선과 빛의 변화를 따라가는 짧은 영상입니다. 릴스·쇼츠용 세로와 웹·유튜브용 가로 중 용도에 맞는 포맷을 선택해 편집합니다.', out: ['색보정·편집을 마친 완성본으로 전달', '세로 9:16 또는 가로 16:9 중 선택', '로고 삽입본과 미삽입본 함께 전달'] },
   { t: '사진 + 영상 패키지', d: '한 번의 방문으로 사진과 영상을 함께 촬영합니다. 같은 빛과 톤으로 결과물이 통일되고, 따로 진행할 때보다 일정과 비용을 크게 줄일 수 있습니다.', out: ['사진 전 컷 + 영상 1편', '오픈·리뉴얼·시공 완료 시점에 가장 많이 선택', '가장 합리적인 견적'] },
 ];
 const steps = [
@@ -18,7 +19,7 @@ const faqs = [
   { q: '결과물은 언제 받나요?', a: '촬영 후 5일 안에 보정·편집을 마친 완성본을 전달합니다. 전달 후 1회 수정 요청을 받습니다.' },
   { q: '어디까지 출장이 가능한가요?', a: '서울·수도권은 기본이고 전국 출장이 가능합니다. 수도권 밖은 거리에 따라 출장비가 견적에 포함됩니다.' },
   { q: '촬영 전에 무엇을 준비해야 하나요?', a: '동선에 있는 물건 정리, 조명 전체 점등, 창 청소 정도면 충분합니다. 소품 배치와 조명 조건은 촬영 당일 현장에서 함께 정리합니다.' },
-  { q: '사진은 어떤 용도로 쓸 수 있나요?', a: '홈페이지, 인스타그램, 네이버 플레이스, 인쇄물, 제안서 등 용도에 맞는 크기로 각각 전달합니다. 상업적 사용에 별도 제한이 없습니다.' },
+  { q: '사진은 어떤 용도로 쓸 수 있나요?', a: '보정을 마친 완성본으로 전달하며, 홈페이지, 인스타그램, 네이버 플레이스, 인쇄물, 제안서 등에 그대로 사용하실 수 있습니다.' },
 ];
 const jsonLd = [{ '@type': 'FAQPage', mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) }];
 const targets = [
@@ -39,7 +40,7 @@ const targets = [
           <li data-reveal>
             <span class="num">0{i + 1}</span>
             <h2>{s.t}</h2>
-            <p class="muted">{s.d}</p>
+            <p class="muted"><Sentences text={s.d} /></p>
             <ul class="out">{s.out.map((o) => <li>{o}</li>)}</ul>
           </li>
         ))}
@@ -52,7 +53,7 @@ const targets = [
       <p class="eyebrow">Process</p>
       <h2 data-reveal>진행 순서</h2>
       <ol class="steps stagger">
-        {steps.map((s, i) => <li data-reveal><span class="num">{i + 1}</span><h3>{s.t}</h3><p class="muted">{s.d}</p></li>)}
+        {steps.map((s, i) => <li data-reveal><span class="num">{i + 1}</span><h3>{s.t}</h3><p class="muted"><Sentences text={s.d} /></p></li>)}
       </ol>
     </div>
   </section>
@@ -72,7 +73,7 @@ const targets = [
       <p class="eyebrow">FAQ</p>
       <h2 data-reveal>자주 묻는 질문</h2>
       <dl class="faq">
-        {faqs.map((f) => <div data-reveal><dt>{f.q}</dt><dd class="muted">{f.a}</dd></div>)}
+        {faqs.map((f) => <div data-reveal><dt>{f.q}</dt><dd class="muted"><Sentences text={f.a} /></dd></div>)}
       </dl>
     </div>
   </section>

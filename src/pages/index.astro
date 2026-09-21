@@ -4,6 +4,7 @@ import Base from '../layouts/Base.astro';
 import WorkGrid from '../components/WorkGrid.astro';
 import Cta from '../components/Cta.astro';
 import Words from '../components/Words.astro';
+import Sentences from '../components/Sentences.astro';
 import { siteConfig } from '../site.config';
 import { getAllWork, getFeaturedWork, getCover, workUrl } from '../lib/work';
 const all = await getAllWork();
@@ -65,10 +66,10 @@ const services = [
         <p class="lead muted" data-reveal>보기 좋은 사진보다 정확한 사진을 목표로 합니다.<br />설계자가 고른 마감재의 색, 조명의 온도, 창으로 들어오는 빛이 실제와 같아야 합니다.</p>
       </div>
       <ul class="svc stagger">
-        {services.map((s) => <li data-reveal><a href="/services/"><span class="num">{s.n}</span><h3>{s.t}</h3><p class="muted">{s.d}</p><span class="arrow">→</span></a></li>)}
+        {services.map((s) => <li data-reveal><a href="/services/"><span class="num">{s.n}</span><h3>{s.t}</h3><p class="muted"><Sentences text={s.d} /></p><span class="arrow">→</span></a></li>)}
       </ul>
       <ul class="strengths stagger">
-        {strengths.map((s, i) => <li data-reveal><span class="num">0{i + 1}</span><h3>{s.t}</h3><p class="muted">{s.d}</p></li>)}
+        {strengths.map((s, i) => <li data-reveal><span class="num">0{i + 1}</span><h3>{s.t}</h3><p class="muted"><Sentences text={s.d} /></p></li>)}
       </ul>
     </div>
   </section>
