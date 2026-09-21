@@ -9,8 +9,15 @@ import { siteConfig } from '../site.config';
 import { getAllWork, getFeaturedWork, getCover, workUrl } from '../lib/work';
 const all = await getAllWork();
 const featured = await getFeaturedWork(7);
-const hero = all.find((w) => w.id === 'stay-namyangju-damyeonjae') ?? all[0];
-const heroImage = getCover(hero.id, hero.data.cover);
+const heroIds = ['stay-namyangju-damyeonjae', 'showroom-duomo-lighting', 'cafe-y3s', 'showroom-knoll', 'stay-anam-anwoljae'];
+const slides = heroIds.map((id) => all.find((w) => w.id === id)).filter(Boolean).map((w) => ({ work: w!, image: getCover(w!.id, w!.data.cover) }));
+const hero = slides[0].work;
+const heroImage = slides[0].image;
+const principles = [
+  { k: 'vertical', t: '수직을 세웁니다', d: '공간 사진에서 기울어진 수직선은 가장 먼저 눈에 띄는 결함입니다. 촬영 단계에서 카메라 수평을 잡고, 후보정에서 원근을 정리해 벽과 기둥, 창틀의 수직을 유지합니다.', id: 'showroom-knoll' },
+  { k: 'light', t: '빛을 섞지 않습니다', d: '대부분의 인테리어 공간에는 자연광과 전구색 조명, 주광색 LED가 동시에 존재합니다. 색온도가 뒤섞이면 애써 고른 마감재의 색이 무너집니다. 조명 조건을 정리하고, 필요하면 구간을 나누어 촬영한 뒤 합칩니다.', id: 'beauty-onhyu-spa' },
+  { k: 'window', t: '창을 살립니다', d: '실내에 노출을 맞추면 창이 하얗게 날아가고, 창에 맞추면 실내가 어두워집니다. 실내와 창밖을 따로 촬영해 합쳐, 공간이 실제로 보이는 그대로 밝고 바깥 풍경까지 담습니다.', id: 'cafe-y3s' },
+].map((p) => ({ ...p, image: getCover(p.id, all.find((w) => w.id === p.id)!.data.cover) }));
 const clients = ['Knoll', 'Duomo Lighting', 'Knotty', 'OODOOD', 'Y3S', '프뤼떼마지', '마조리카', '모모란위그', '온휴스파', '그리디센트', '그린보이즈', '오션키즈', '담연재', '안월재', 'Mukta'];
 const strengths = [
   { t: '사진과 영상, 한 번의 촬영으로', d: '한 번의 방문으로 사진과 영상을 함께 촬영합니다. 일정은 하루로, 결과물의 톤은 하나로 맞춥니다.' },
@@ -26,8 +33,9 @@ const services = [
 ---
 <Base title="공간어스 | 인테리어 / 공간 사진 영상 촬영 스튜디오" description={siteConfig.description}>
   <section class="hero grain" data-hero-dark>
-    <div class="hero-media" data-parallax>
-      <Image src={heroImage} alt={`${hero.data.title} 공간 사진`} widths={[960, 1440, 1920, 2560]} sizes="100vw" width={2560} height={1707} loading="eager" fetchpriority="high" />
+    <div class="hero-media" data-parallax style={`--n:${slides.length}`}>
+      <div class="slide base"><Image src={heroImage} alt={`${hero.data.title} 공간 사진`} widths={[960, 1440, 1920, 2560]} sizes="100vw" width={2560} height={1707} loading="eager" fetchpriority="high" /></div>
+      {slides.map((s, i) => <div class="slide" style={`--i:${i}`}><Image src={s.image} alt={`${s.work.data.title} 공간 사진`} widths={[960, 1440, 1920, 2560]} sizes="100vw" width={2560} height={1707} loading={i === 0 ? 'eager' : 'lazy'} /></div>)}
     </div>
     <div class="container hero-content">
       <p class="eyebrow hero-eyebrow">Interior &amp; Space / Photography / Film</p>
@@ -39,7 +47,9 @@ const services = [
         <p class="lead">모든 공간에는 이유와 철학이 담겨 있습니다.<br />공간어스는 브랜드를 위해, 그 이유가 읽히는 사진과 영상을 남깁니다.</p>
         <a href="/work/" class="btn">포트폴리오 보기</a>
       </div>
-      <a class="hero-caption" href={workUrl(hero)}><span class="dot"></span>{hero.data.title} <span class="dim">— {hero.data.year}</span></a>
+      <div class="hero-captions" style={`--n:${slides.length}`}>
+        {slides.map((s, i) => <span class="hero-caption" style={`--i:${i}`}><span class="dot"></span>{s.work.data.title} <span class="dim">— {s.work.data.year}</span></span>)}
+      </div>
     </div>
     <div class="scroll-hint" aria-hidden="true"><span></span></div>
   </section>
@@ -76,9 +86,19 @@ const services = [
 
   <section class="section">
     <div class="container principles">
-      <p class="eyebrow" data-reveal>Principles</p>
-      <h2 data-reveal="line"><span class="clause"><Words text="수직을 세우고," /></span><br /><span class="clause"><Words text="빛을 섞지 않고," /></span><br /><span class="clause"><Words text="창을 살립니다." /></span></h2>
-      <a href="/about/" class="link" data-reveal>촬영 기준 자세히 →</a>
+      <div class="p-media">
+        <div class="p-sticky">
+          {principles.map((p, i) => <div data-principle-img={p.k} class:list={['p-img', { active: i === 0 }]}><Image src={p.image} alt={`${p.t} — ${p.t}`} widths={[720, 1080, 1440]} sizes="(max-width: 1024px) 100vw, 45vw" width={1440} height={1800} loading="lazy" /></div>)}
+        </div>
+      </div>
+      <div class="p-text">
+        <p class="eyebrow" data-reveal>Principles</p>
+        <h2 data-reveal="line"><span class="clause"><Words text="수직을 세우고," /></span><br /><span class="clause"><Words text="빛을 섞지 않고," /></span><br /><span class="clause"><Words text="창을 살립니다." /></span></h2>
+        <ol class="p-list">
+          {principles.map((p, i) => <li data-principle={p.k} class:list={{ active: i === 0 }}><span class="num">0{i + 1}</span><h3>{p.t}</h3><p class="muted"><Sentences text={p.d} /></p></li>)}
+        </ol>
+        <a href="/about/" class="link" data-reveal>촬영 기준 자세히 →</a>
+      </div>
     </div>
   </section>
 
@@ -87,7 +107,13 @@ const services = [
 <style>
   .hero { position: relative; min-height: 100svh; display: flex; align-items: flex-end; color: #fff; overflow: hidden; margin-top: -84px; }
   .hero-media { position: absolute; inset: 0; background: #111; }
-  .hero-media img { width: 100%; height: 100%; object-fit: cover; transform: scale(1.16); will-change: transform; animation: kb 1.6s ease-out both; }
+  .hero-media img { width: 100%; height: 100%; object-fit: cover; transform: scale(1.16); will-change: transform; }
+  .slide { position: absolute; inset: 0; opacity: 0; animation: slide calc(var(--n) * 7s) linear infinite; animation-delay: calc(var(--i) * 7s); }
+  .slide.base { opacity: 1; animation: kb 1.6s ease-out both; }
+  .slide img { animation: kb-zoom calc(var(--n) * 7s) linear infinite; animation-delay: calc(var(--i) * 7s); }
+  .slide.base img { animation: none; }
+  @keyframes slide { 0% { opacity: 0; } 7% { opacity: 1; } 23% { opacity: 1; } 30% { opacity: 0; } 100% { opacity: 0; } }
+  @keyframes kb-zoom { 0% { scale: 1; } 30% { scale: 1.04; } 100% { scale: 1.04; } }
   @keyframes kb { from { opacity: 0; } }
   .hero-media::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,.4) 0%, rgba(0,0,0,.05) 40%, rgba(0,0,0,.62) 100%), radial-gradient(120% 90% at 50% 40%, transparent 55%, rgba(0,0,0,.45) 100%); }
   .hero-content { position: relative; width: 100%; padding-top: 140px; padding-bottom: clamp(40px, 7vw, 96px); max-width: var(--max); }
@@ -102,7 +128,11 @@ const services = [
   .hero .btn { border-color: #fff; color: #fff; }
   .hero .btn:hover { background: #fff; color: #111; }
   @keyframes fadeup { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
-  .hero-caption { display: inline-flex; align-items: center; gap: 10px; margin-top: clamp(28px, 4vw, 48px); font-size: 13px; font-weight: 500; opacity: 0; animation: fadeup 1s var(--ease) 1s forwards; }
+  .hero-captions { position: relative; height: 20px; margin-top: clamp(28px, 4vw, 48px); }
+  .hero-caption { position: absolute; left: 0; top: 0; display: inline-flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 500; opacity: 0; animation: cap calc(var(--n) * 7s) linear infinite; animation-delay: calc(var(--i) * 7s); pointer-events: none; }
+  .hero-caption[style*='--i:0'] { animation-name: cap-first; }
+  @keyframes cap { 0% { opacity: 0; } 3% { opacity: 0; } 6% { opacity: 1; } 22% { opacity: 1; } 24% { opacity: 0; } 100% { opacity: 0; } }
+  @keyframes cap-first { 0% { opacity: 1; } 22% { opacity: 1; } 24% { opacity: 0; } 98% { opacity: 0; } 100% { opacity: 1; } }
   .hero-caption .dim { color: rgba(255,255,255,.6); }
   .dot { width: 8px; height: 8px; border-radius: 50%; background: #fff; animation: pulse 2s infinite; }
   @keyframes pulse { 50% { opacity: .3; } }
@@ -130,9 +160,21 @@ const services = [
   .num { display: block; font-size: 12px; color: var(--muted); margin-bottom: 14px; letter-spacing: .08em; }
   .strengths h3 { margin-bottom: 12px; }
   .strengths p { font-size: 15px; }
-  .principles { display: grid; gap: 24px; }
-  .principles h2 { font-size: clamp(28px, 4.2vw, 64px); }
+  .principles { display: grid; grid-template-columns: 5fr 6fr; gap: clamp(32px, 6vw, 96px); align-items: start; }
+  .principles h2 { font-size: clamp(28px, 4vw, 60px); }
   .principles .clause { white-space: nowrap; }
+  .p-sticky { position: sticky; top: 100px; aspect-ratio: 4 / 5; overflow: hidden; background: var(--soft); }
+  .p-img { position: absolute; inset: 0; opacity: 0; transition: opacity 1s var(--ease); }
+  .p-img img { width: 100%; height: 100%; object-fit: cover; transform: scale(1.04); transition: transform 1.6s var(--ease); }
+  .p-img.active { opacity: 1; }
+  .p-img.active img { transform: scale(1); }
+  .p-text { display: grid; gap: 28px; padding-top: 8px; }
+  .p-list { display: grid; gap: 0; margin-top: 12px; }
+  .p-list li { border-top: 1px solid var(--line); padding: 28px 0; opacity: .38; transition: opacity .6s var(--ease); }
+  .p-list li.active { opacity: 1; }
+  .p-list h3 { font-size: clamp(20px, 1.8vw, 26px); margin-bottom: 12px; }
+  .p-list p { max-width: 34em; }
+  @media (max-width: 1024px) { .principles { grid-template-columns: 1fr; } .p-sticky { position: relative; top: 0; aspect-ratio: 4 / 3; } .p-list li { opacity: 1; } }
   @media (max-width: 1024px) { .strengths { grid-template-columns: repeat(2, 1fr); } .svc { grid-template-columns: 1fr; } .svc li + li { border-left: 0; } .svc a, .svc li:first-child a { padding: 24px 0 28px; } .svc .arrow { right: 0; top: 24px; } }
   @media (max-width: 768px) {
     .hero { min-height: 92svh; }
@@ -143,5 +185,5 @@ const services = [
     .head { flex-direction: column; align-items: flex-start; gap: 12px; }
   }
   @media (max-width: 640px) { .strengths { grid-template-columns: 1fr; gap: 28px; } }
-  @media (prefers-reduced-motion: reduce) { .line > span, .hero-row, .hero-eyebrow, .hero-caption { animation: none; transform: none; opacity: 1; } .hero-media img { animation: none; opacity: 1; } }
+  @media (prefers-reduced-motion: reduce) { .line > span, .hero-row, .hero-eyebrow { animation: none; transform: none; opacity: 1; } .slide:not(.base), .hero-caption:not([style*='--i:0']) { display: none; } .hero-caption, .slide.base, .slide img { animation: none; opacity: 1; } }
 </style>

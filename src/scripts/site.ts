@@ -81,8 +81,8 @@ function parallax() {
     for (const el of els) {
       const r = el.getBoundingClientRect();
       const p = (r.top + r.height / 2 - window.innerHeight / 2) / window.innerHeight; // -1..1
-      const img = el.querySelector('img') as HTMLElement | null;
-      if (img) img.style.transform = `translateY(${p * -8}%) scale(1.16)`;
+      const soft = el.dataset.parallax === 'soft';
+      el.querySelectorAll<HTMLElement>('img').forEach((img) => { img.style.transform = soft ? `translateY(${p * -4}%) scale(1.08)` : `translateY(${p * -8}%) scale(1.16)`; });
     }
     requestAnimationFrame(run);
   };
@@ -107,8 +107,23 @@ function toast(msg: string) {
   clearTimeout((t as any)._h); (t as any)._h = setTimeout(() => t!.classList.remove('on'), 2600);
 }
 
+function principles() {
+  const items = document.querySelectorAll<HTMLElement>('[data-principle]');
+  const imgs = document.querySelectorAll<HTMLElement>('[data-principle-img]');
+  if (!items.length || !imgs.length) return;
+  const io = new IntersectionObserver((entries) => {
+    for (const e of entries) {
+      if (!e.isIntersecting) continue;
+      const k = (e.target as HTMLElement).dataset.principle;
+      imgs.forEach((im) => im.classList.toggle('active', im.dataset.principleImg === k));
+      items.forEach((it) => it.classList.toggle('active', it === e.target));
+    }
+  }, { rootMargin: '-45% 0px -45% 0px', threshold: 0 });
+  items.forEach((it) => io.observe(it));
+}
+
 function init() {
-  mailCopy();
+  mailCopy(); principles();
   smooth(); reveal(); header(); countUp(); cursor(); parallax();
   document.getElementById('cursor')?.classList.remove('on');
 }

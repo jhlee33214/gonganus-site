@@ -15,13 +15,16 @@ const cover = getCover(work.id, d.cover);
 const rest = images.filter((i) => i.image !== cover);
 const { prev, next } = await getAdjacent(work.id);
 const cat = CATEGORIES[d.category];
-type Row = { kind: 'wide' | 'pair'; items: typeof images };
+// 에디토리얼 리듬: 풀폭 → 두 장 나란히 → 오른쪽으로 치우친 한 장 → 풀폭 → 두 장 → 왼쪽으로 치우친 한 장 … 반복
+type Kind = 'wide' | 'pair' | 'right' | 'left';
+type Row = { kind: Kind; items: typeof images };
+const pattern: Kind[] = ['wide', 'pair', 'right', 'wide', 'pair', 'left'];
 const rows: Row[] = [];
-for (const img of rest) {
-  const portrait = img.image.height > img.image.width;
-  const last = rows[rows.length - 1];
-  if (portrait && last?.kind === 'pair' && last.items.length === 1) last.items.push(img);
-  else rows.push({ kind: portrait ? 'pair' : 'wide', items: [img] });
+let pi = 0;
+for (let i = 0; i < rest.length; ) {
+  const kind = pattern[pi % pattern.length]; pi++;
+  if (kind === 'pair') { rows.push({ kind, items: rest.slice(i, i + 2) }); i += 2; }
+  else { rows.push({ kind, items: [rest[i]] }); i += 1; }
 }
 const title = `${d.title} ${cat.label} 촬영 — 공간어스`;
 const description = `${d.summary} ${d.year}년 ${d.location ? d.location + ' ' : ''}${cat.label} 공간 사진 ${images.length}장.`;
@@ -66,8 +69,8 @@ const jsonLd = [{
           <div class:list={['row', row.kind]}>
             {row.items.map((img) => {
               const n = images.indexOf(img) + 1;
-              const w = row.kind === 'wide' ? 1920 : 960;
-              return <div class="img-zoom" data-reveal="wipe"><Image src={img.image} alt={`${d.title} 공간 사진 ${n}`} widths={row.kind === 'wide' ? [960, 1440, 1920] : [480, 960, 1440]} sizes={row.kind === 'wide' ? '(max-width: 1024px) 100vw, 66vw' : '(max-width: 640px) 100vw, 33vw'} width={w} height={Math.round(w * img.image.height / img.image.width)} loading="lazy" /></div>;
+              const w = row.kind === 'wide' ? 1920 : 1200;
+              return <div class="img-zoom" data-reveal="wipe" data-parallax="soft"><Image src={img.image} alt={`${d.title} 공간 사진 ${n}`} widths={row.kind === 'wide' ? [960, 1440, 1920] : [640, 960, 1440]} sizes={row.kind === 'wide' ? '(max-width: 1024px) 100vw, 66vw' : '(max-width: 640px) 100vw, 40vw'} width={w} height={Math.round(w * img.image.height / img.image.width)} loading="lazy" /></div>;
             })}
           </div>
         ))}
@@ -93,9 +96,14 @@ const jsonLd = [{
   .facts div { display: flex; justify-content: space-between; gap: 16px; }
   .facts dt { color: var(--muted); }
   .facts dd { margin: 0; font-weight: 500; }
-  .gallery { display: grid; gap: 24px; }
-  .row.pair { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
-  .row .img-zoom img { width: 100%; height: auto; }
+  .gallery { display: grid; gap: clamp(32px, 4vw, 64px); }
+  .row.pair { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: start; }
+  .row.pair > :last-child:not(:only-child) { margin-top: clamp(24px, 4vw, 64px); }
+  .row.right { display: flex; justify-content: flex-end; }
+  .row.left { display: flex; justify-content: flex-start; }
+  .row.right > *, .row.left > * { width: 62%; }
+  .row .img-zoom { overflow: hidden; }
+  .row .img-zoom img { width: 100%; height: auto; will-change: transform; }
   .cover { overflow: hidden; background: var(--soft); }
   .row.pair > :only-child { grid-column: 1 / -1; width: 70%; margin: 0 auto; }
   .adjacent { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 16px; padding-top: 40px; padding-bottom: 56px; border-top: 1px solid var(--line); }
@@ -103,5 +111,5 @@ const jsonLd = [{
   .adj strong { font-size: 18px; font-weight: 500; letter-spacing: -0.02em; }
   .right { text-align: right; }
   @media (max-width: 1024px) { .layout { grid-template-columns: 1fr; gap: 32px; } .sticky { position: static; } }
-  @media (max-width: 640px) { .row.pair { grid-template-columns: 1fr; gap: 20px; } .row.pair > :only-child { width: 100%; } .gallery { gap: 20px; } .cover { aspect-ratio: 4 / 5; } }
+  @media (max-width: 640px) { .row.pair { grid-template-columns: 1fr; gap: 20px; } .row.pair > :last-child:not(:only-child) { margin-top: 0; } .row.pair > :only-child, .row.right > *, .row.left > * { width: 100%; } .gallery { gap: 24px; } .cover { aspect-ratio: 4 / 5; } }
 </style>
