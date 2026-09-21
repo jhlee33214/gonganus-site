@@ -111,15 +111,12 @@ function principles() {
   const items = document.querySelectorAll<HTMLElement>('[data-principle]');
   const imgs = document.querySelectorAll<HTMLElement>('[data-principle-img]');
   if (!items.length || !imgs.length) return;
-  const io = new IntersectionObserver((entries) => {
-    for (const e of entries) {
-      if (!e.isIntersecting) continue;
-      const k = (e.target as HTMLElement).dataset.principle;
-      imgs.forEach((im) => im.classList.toggle('active', im.dataset.principleImg === k));
-      items.forEach((it) => it.classList.toggle('active', it === e.target));
-    }
-  }, { rootMargin: '-45% 0px -45% 0px', threshold: 0 });
-  items.forEach((it) => io.observe(it));
+  const activate = (it: HTMLElement) => {
+    const k = it.dataset.principle;
+    imgs.forEach((im) => im.classList.toggle('active', im.dataset.principleImg === k));
+    items.forEach((x) => x.classList.toggle('active', x === it));
+  };
+  items.forEach((it) => { ['mouseenter', 'focus', 'click'].forEach((ev) => it.addEventListener(ev, () => activate(it))); });
 }
 
 function init() {

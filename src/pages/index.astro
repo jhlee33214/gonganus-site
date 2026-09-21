@@ -95,7 +95,7 @@ const services = [
         <p class="eyebrow" data-reveal>Principles</p>
         <h2 data-reveal="line"><span class="clause"><Words text="수직을 세우고," /></span><br /><span class="clause"><Words text="빛을 섞지 않고," /></span><br /><span class="clause"><Words text="창을 살립니다." /></span></h2>
         <ol class="p-list">
-          {principles.map((p, i) => <li data-principle={p.k} class:list={{ active: i === 0 }}><span class="num">0{i + 1}</span><h3>{p.t}</h3><p class="muted"><Sentences text={p.d} /></p></li>)}
+          {principles.map((p, i) => <li data-principle={p.k} class:list={{ active: i === 0 }} tabindex="0"><div class="p-inline"><Image src={p.image} alt={`${p.t} 예시 사진`} widths={[640, 960]} sizes="100vw" width={960} height={720} loading="lazy" /></div><span class="num">0{i + 1}</span><h3>{p.t}</h3><p class="muted"><Sentences text={p.d} /></p></li>)}
         </ol>
         <a href="/about/" class="link" data-reveal>촬영 기준 자세히 →</a>
       </div>
@@ -118,7 +118,7 @@ const services = [
   .hero-media::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,.4) 0%, rgba(0,0,0,.05) 40%, rgba(0,0,0,.62) 100%), radial-gradient(120% 90% at 50% 40%, transparent 55%, rgba(0,0,0,.45) 100%); }
   .hero-content { position: relative; width: 100%; padding-top: 140px; padding-bottom: clamp(40px, 7vw, 96px); max-width: var(--max); }
   .hero-eyebrow { color: rgba(255,255,255,.75); margin-bottom: 22px; opacity: 0; animation: fadeup 1s var(--ease) .5s forwards; }
-  .display { font-size: clamp(36px, 6.2vw, 96px); line-height: 1.04; letter-spacing: -0.035em; font-weight: 500; }
+  .display { font-size: clamp(34px, 5.6vw, 88px); line-height: 1.12; letter-spacing: -0.035em; font-weight: 500; }
   .line { display: block; overflow: hidden; padding-bottom: .06em; margin-bottom: -.06em; }
   .line > span { display: block; transform: translateY(110%); animation: rise 1.2s var(--ease) .25s forwards; }
   .line:nth-child(2) > span { animation-delay: .38s; }
@@ -165,22 +165,22 @@ const services = [
   .principles .clause { white-space: nowrap; }
   .p-sticky { position: sticky; top: 100px; aspect-ratio: 4 / 5; overflow: hidden; background: var(--soft); }
   .p-img { position: absolute; inset: 0; opacity: 0; transition: opacity 1s var(--ease); }
-  .p-img img { width: 100%; height: 100%; object-fit: cover; transform: scale(1.04); transition: transform 1.6s var(--ease); }
+  .p-img img { width: 100%; height: 100%; object-fit: cover; }
   .p-img.active { opacity: 1; }
-  .p-img.active img { transform: scale(1); }
+  .p-inline { display: none; }
   .p-text { display: grid; gap: 28px; padding-top: 8px; }
   .p-list { display: grid; gap: 0; margin-top: 12px; }
-  .p-list li { border-top: 1px solid var(--line); padding: 28px 0; opacity: .38; transition: opacity .6s var(--ease); }
+  .p-list li { border-top: 1px solid var(--line); padding: 28px 0; opacity: .38; transition: opacity .6s var(--ease); cursor: default; outline: none; }
   .p-list li.active { opacity: 1; }
   .p-list h3 { font-size: clamp(20px, 1.8vw, 26px); margin-bottom: 12px; }
   .p-list p { max-width: 34em; }
-  @media (max-width: 1024px) { .principles { grid-template-columns: 1fr; } .p-sticky { position: relative; top: 0; aspect-ratio: 4 / 3; } .p-list li { opacity: 1; } }
+  @media (max-width: 1024px) { .principles { grid-template-columns: 1fr; } .p-media { display: none; } .p-list li { opacity: 1; } .p-inline { display: block; aspect-ratio: 4 / 3; overflow: hidden; margin-bottom: 20px; background: var(--soft); } .p-inline img { width: 100%; height: 100%; object-fit: cover; } }
   @media (max-width: 1024px) { .strengths { grid-template-columns: repeat(2, 1fr); } .svc { grid-template-columns: 1fr; } .svc li + li { border-left: 0; } .svc a, .svc li:first-child a { padding: 24px 0 28px; } .svc .arrow { right: 0; top: 24px; } }
   @media (max-width: 768px) {
     .hero { min-height: 92svh; }
     .hero-row { flex-direction: column; align-items: flex-start; gap: 20px; }
     .hero-row .lead { font-size: 16px; }
-    .display { font-size: clamp(34px, 9.5vw, 46px); }
+    .display { font-size: clamp(32px, 8.8vw, 42px); line-height: 1.14; }
     .scroll-hint { display: none; }
     .head { flex-direction: column; align-items: flex-start; gap: 12px; }
   }
