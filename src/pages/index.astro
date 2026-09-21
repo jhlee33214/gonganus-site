@@ -77,7 +77,7 @@ const services = [
   <section class="section">
     <div class="container principles">
       <p class="eyebrow" data-reveal>Principles</p>
-      <h2 data-reveal="line"><Words text="수직을 세우고, 빛을 섞지 않고, 창을 살립니다." /></h2>
+      <h2 data-reveal="line"><span class="clause"><Words text="수직을 세우고," /></span><br /><span class="clause"><Words text="빛을 섞지 않고," /></span><br /><span class="clause"><Words text="창을 살립니다." /></span></h2>
       <a href="/about/" class="link" data-reveal>촬영 기준 자세히 →</a>
     </div>
   </section>
@@ -131,7 +131,8 @@ const services = [
   .strengths h3 { margin-bottom: 12px; }
   .strengths p { font-size: 15px; }
   .principles { display: grid; gap: 24px; }
-  .principles h2 { font-size: clamp(28px, 4.2vw, 64px); max-width: 16em; }
+  .principles h2 { font-size: clamp(28px, 4.2vw, 64px); }
+  .principles .clause { white-space: nowrap; }
   @media (max-width: 1024px) { .strengths { grid-template-columns: repeat(2, 1fr); } .svc { grid-template-columns: 1fr; } .svc li + li { border-left: 0; } .svc a, .svc li:first-child a { padding: 24px 0 28px; } .svc .arrow { right: 0; top: 24px; } }
   @media (max-width: 768px) {
     .hero { min-height: 92svh; }
