@@ -67,7 +67,8 @@ const jsonLd = [{
   .gallery { display: grid; gap: 24px; }
   .row.pair { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
   .row img { width: 100%; height: auto; }
+  .row.pair > :only-child { grid-column: 1 / -1; width: 66%; margin: 0 auto; }
   .adjacent { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 16px; padding-top: 48px; padding-bottom: 24px; font-size: 15px; font-weight: 500; }
   .right { text-align: right; }
-  @media (max-width: 640px) { .row.pair { grid-template-columns: 1fr; gap: 20px; } .gallery { gap: 20px; } }
+  @media (max-width: 640px) { .row.pair { grid-template-columns: 1fr; gap: 20px; } .row.pair > :only-child { width: 100%; } .gallery { gap: 20px; } }
 </style>

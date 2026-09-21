@@ -51,6 +51,3 @@ ul { margin: 0; padding: 0; list-style: none; }
 .btn.primary:hover { background: #333; }
 .btn.lg { padding: 20px 32px; font-size: 17px; }
 
-.fade-in { animation: fade .5s ease both; }
-@keyframes fade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
-@media (prefers-reduced-motion: reduce) { .fade-in { animation: none; } }
