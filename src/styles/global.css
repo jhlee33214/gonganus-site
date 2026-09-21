@@ -139,3 +139,6 @@ a:hover [data-reveal="wipe"].in img { transform: scale(1.04); }
 [data-reveal="logo"].in .rings { animation: rings-breathe 9s ease-in-out 3s infinite; transform-origin: 50% 55%; }
 @keyframes rings-breathe { 50% { transform: rotate(8deg); } }
 @media (prefers-reduced-motion: reduce) { [data-reveal="logo"] .word { opacity: 1; transform: none; } [data-reveal="logo"] .ring { stroke-dashoffset: 0; } [data-reveal="logo"].in .rings { animation: none; } }
+
+#toast { position: fixed; left: 50%; bottom: 28px; transform: translate(-50%, 16px); z-index: 60; background: rgba(12,12,12,.92); color: #fff; font-size: 13px; padding: 12px 18px; border-radius: 999px; opacity: 0; pointer-events: none; transition: opacity .3s var(--ease), transform .4s var(--ease); white-space: nowrap; max-width: calc(100vw - 32px); }
+#toast.on { opacity: 1; transform: translate(-50%, 0); }

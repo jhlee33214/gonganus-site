@@ -89,7 +89,26 @@ function parallax() {
   requestAnimationFrame(run);
 }
 
+function mailCopy() {
+  document.querySelectorAll<HTMLAnchorElement>('a[href^="mailto:"]').forEach((a) => {
+    if (a.dataset.copyBound) return;
+    a.dataset.copyBound = '1';
+    a.addEventListener('click', () => {
+      const addr = a.getAttribute('href')!.replace(/^mailto:/, '');
+      toast(`이메일 · ${addr}`);
+      navigator.clipboard?.writeText?.(addr).then(() => toast(`이메일 주소를 복사했습니다 · ${addr}`)).catch(() => {});
+    });
+  });
+}
+function toast(msg: string) {
+  let t = document.getElementById('toast');
+  if (!t) { t = document.createElement('div'); t.id = 'toast'; document.body.appendChild(t); }
+  t.textContent = msg; t.classList.add('on');
+  clearTimeout((t as any)._h); (t as any)._h = setTimeout(() => t!.classList.remove('on'), 2600);
+}
+
 function init() {
+  mailCopy();
   smooth(); reveal(); header(); countUp(); cursor(); parallax();
   document.getElementById('cursor')?.classList.remove('on');
 }
