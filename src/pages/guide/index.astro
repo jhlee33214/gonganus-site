@@ -1,0 +1,39 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Cta from '../../components/Cta.astro';
+import Sentences from '../../components/Sentences.astro';
+const guides = (await getCollection('guides')).sort((a, b) => a.data.order - b.data.order);
+---
+<Base title="촬영 가이드 | 인테리어 / 공간 촬영 전에 알아둘 것 — 공간어스" description="카페, 숙소, 쇼룸 촬영 시기와 준비, 비용이 정해지는 기준, 사진과 영상의 선택. 인테리어 촬영을 계획하는 분들을 위한 공간어스의 가이드.">
+  <section class="section">
+    <div class="container">
+      <h1 data-reveal>Guide</h1>
+      <p class="lead muted" style="margin-top:16px" data-reveal>인테리어 촬영을 계획하는 분들이 가장 많이 묻는 질문에 답합니다.<br />공간 종류별 촬영 방법부터 비용 기준, 준비 사항까지.</p>
+      <ol class="list stagger">
+        {guides.map((g, i) => (
+          <li data-reveal>
+            <a href={`/guide/${g.id}/`}>
+              <span class="num">0{i + 1}</span>
+              <h2>{g.data.question}</h2>
+              <p class="muted"><Sentences text={g.data.answer.split(/(?<=[.!?])\s+/)[0]} /></p>
+              <span class="arrow">→</span>
+            </a>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+  <Cta />
+</Base>
+<style>
+  .list { margin-top: 48px; border-top: 1px solid var(--fg); }
+  .list li { border-bottom: 1px solid var(--line); }
+  .list a { display: grid; grid-template-columns: 56px 1fr 40px; gap: 16px; align-items: start; padding: 28px 0; transition: opacity .3s; }
+  .list a:hover { opacity: .7; }
+  .num { font-size: 12px; letter-spacing: .08em; color: var(--muted); padding-top: 8px; }
+  .list h2 { font-size: clamp(20px, 2vw, 28px); margin-bottom: 8px; }
+  .list p { max-width: 44em; }
+  .arrow { font-size: 20px; padding-top: 4px; }
+  @media (max-width: 640px) { .list a { grid-template-columns: 1fr; gap: 6px; } .arrow { display: none; } }
+</style>

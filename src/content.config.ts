@@ -18,4 +18,18 @@ const work = defineCollection({
   }),
 });
 
-export const collections = { work };
+const guides = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/guides' }),
+  schema: z.object({
+    title: z.string(),
+    question: z.string(),
+    answer: z.string(),
+    description: z.string(),
+    category: z.enum(CATEGORY_KEYS).optional(),
+    keywords: z.array(z.string()).default([]),
+    faq: z.array(z.object({ q: z.string(), a: z.string() })).default([]),
+    order: z.number().int().default(99),
+  }),
+});
+
+export const collections = { work, guides };

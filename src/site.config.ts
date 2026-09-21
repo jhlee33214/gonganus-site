@@ -17,6 +17,7 @@ export const nav = [
   { href: '/work/', label: 'Work' },
   { href: '/video/', label: 'Video' },
   { href: '/services/', label: 'Services' },
+  { href: '/guide/', label: 'Guide' },
   { href: '/about/', label: 'About' },
   { href: '/contact/', label: 'Contact' },
 ];
