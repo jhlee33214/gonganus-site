@@ -12,8 +12,8 @@
 <clipPath id="i_clip_3">
 <path transform="matrix(1,0,0,-1,-187.0444,749.49966)" d="M0 1080H1080V0H0Z"/>
 </clipPath>
-<mask id="i_cut" maskUnits="userSpaceOnUse" x="-6.0" y="-6.0" width="720.0615" height="468.9054"><rect x="-6.0" y="-6.0" width="720.0615" height="468.9054" fill="#fff"/><g stroke="#000" stroke-width="0.05" stroke-linejoin="round"><use data-text="g" xlink:href="#i_font_2_74" transform="matrix(195.7119,0,0,-195.7119,4,242.94104)" fill="#000"/><use data-text="o" xlink:href="#i_font_2_82" transform="matrix(195.7119,0,0,-195.7119,86.59042,242.94104)" fill="#000"/><use data-text="n" xlink:href="#i_font_2_81" transform="matrix(195.7119,0,0,-195.7119,181.70639,242.94104)" fill="#000"/><use data-text="g" xlink:href="#i_font_2_74" transform="matrix(195.7119,0,0,-195.7119,279.17094,242.94104)" fill="#000"/><use data-text="a" xlink:href="#i_font_2_68" transform="matrix(195.7119,0,0,-195.7119,361.76139,242.94104)" fill="#000"/><use data-text="n" xlink:href="#i_font_2_81" transform="matrix(195.7119,0,0,-195.7119,439.26329,242.94104)" fill="#000"/><use data-text="u" xlink:href="#i_font_2_88" transform="matrix(195.7119,0,0,-195.7119,536.7278,242.94104)" fill="#000"/><use data-text="s" xlink:href="#i_font_2_86" transform="matrix(195.7119,0,0,-195.7119,629.29959,242.94104)" fill="#000"/></g></mask></defs><g class="rings" mask="url(#i_cut)" fill="none" stroke="#010203" stroke-width="6.5"><circle pathLength="1" cx="429.46" cy="174.00" r="170.0"/><circle pathLength="1" cx="280.96" cy="281.30" r="171.6"/></g><g class="word"><use data-text="g" xlink:href="#i_font_2_74" transform="matrix(195.7119,0,0,-195.7119,4,242.94104)" fill="#010203"/><use data-text="o" xlink:href="#i_font_2_82" transform="matrix(195.7119,0,0,-195.7119,86.59042,242.94104)" fill="#010203"/><use data-text="n" xlink:href="#i_font_2_81" transform="matrix(195.7119,0,0,-195.7119,181.70639,242.94104)" fill="#010203"/><use data-text="g" xlink:href="#i_font_2_74" transform="matrix(195.7119,0,0,-195.7119,279.17094,242.94104)" fill="#010203"/><use data-text="a" xlink:href="#i_font_2_68" transform="matrix(195.7119,0,0,-195.7119,361.76139,242.94104)" fill="#010203"/><use data-text="n" xlink:href="#i_font_2_81" transform="matrix(195.7119,0,0,-195.7119,439.26329,242.94104)" fill="#010203"/><use data-text="u" xlink:href="#i_font_2_88" transform="matrix(195.7119,0,0,-195.7119,536.7278,242.94104)" fill="#010203"/><use data-text="s" xlink:href="#i_font_2_86" transform="matrix(195.7119,0,0,-195.7119,629.29959,242.94104)" fill="#010203"/></g>
-<g clip-path="url(#clip_1)">
+</defs>
+<g clip-path="url(#i_clip_1)">
 <g inkscape:groupmode="layer" inkscape:label="Layer 1">
 
 
@@ -23,7 +23,7 @@
 
 
 
-<g clip-path="url(#clip_3)">
+<g clip-path="url(#i_clip_3)">
 
 
 
@@ -34,4 +34,4 @@
 </g>
 </g>
 </g>
-</svg>
+<g class="rings" fill="none" stroke="#010203" stroke-width="5.5"><circle class="ring r1" pathLength="1" cx="429.46" cy="174.00" r="170.0"/><circle class="ring r2" pathLength="1" cx="280.96" cy="281.30" r="171.6"/></g><g class="word"><use data-text="g" xlink:href="#i_font_2_74" transform="matrix(195.7119,0,0,-195.7119,4,242.94104)" fill="#010203"/><use data-text="o" xlink:href="#i_font_2_82" transform="matrix(195.7119,0,0,-195.7119,86.59042,242.94104)" fill="#010203"/><use data-text="n" xlink:href="#i_font_2_81" transform="matrix(195.7119,0,0,-195.7119,181.70639,242.94104)" fill="#010203"/><use data-text="g" xlink:href="#i_font_2_74" transform="matrix(195.7119,0,0,-195.7119,279.17094,242.94104)" fill="#010203"/><use data-text="a" xlink:href="#i_font_2_68" transform="matrix(195.7119,0,0,-195.7119,361.76139,242.94104)" fill="#010203"/><use data-text="n" xlink:href="#i_font_2_81" transform="matrix(195.7119,0,0,-195.7119,439.26329,242.94104)" fill="#010203"/><use data-text="u" xlink:href="#i_font_2_88" transform="matrix(195.7119,0,0,-195.7119,536.7278,242.94104)" fill="#010203"/><use data-text="s" xlink:href="#i_font_2_86" transform="matrix(195.7119,0,0,-195.7119,629.29959,242.94104)" fill="#010203"/></g></svg>
