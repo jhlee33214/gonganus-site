@@ -18,7 +18,7 @@
   {
     "slug": "pool-oceankids",
     "title": "오션키즈 키즈풀",
-    "category": "etc",
+    "category": "commercial",
     "summary": "실내 키즈 수영장. 물의 반사와 공간의 색이 살아나도록 조명 조건을 정리해 촬영했습니다.",
     "featured": true
   },
@@ -84,7 +84,7 @@
   {
     "slug": "franchise-greenboys",
     "title": "그린보이즈",
-    "category": "etc",
+    "category": "commercial",
     "location": "서울 신촌",
     "summary": "프랜차이즈 그린보이즈 신촌점. 매장 홍보와 가맹 안내에 쓰이는 공간 사진입니다.",
     "featured": false
@@ -99,7 +99,7 @@
   {
     "slug": "workshop-greedyscent",
     "title": "그리디센트 워크숍",
-    "category": "etc",
+    "category": "commercial",
     "summary": "향 공방 그리디센트의 워크숍. 작업대와 소품의 질감을 중심으로 기록했습니다.",
     "featured": false
   },
