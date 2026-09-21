@@ -12,6 +12,7 @@ const work = defineCollection({
     year: z.number().int(),
     location: z.string().optional(),
     summary: z.string(),
+    note: z.string().optional(),
     cover: z.string().default('01.jpg'),
     featured: z.boolean().default(false),
     order: z.number().int(),

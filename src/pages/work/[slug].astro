@@ -21,6 +21,7 @@ const strip = await Promise.all(images.map((i) => getImage({ src: i.image, width
 const viewer = images.map((i, n) => ({ src: full[n].src, w: i.image.width, h: i.image.height, thumb: strip[n].src }));
 const title = `${d.title} ${cat.label} 촬영 — 공간어스`;
 const description = `${d.summary} ${d.year}년 ${d.location ? d.location + ' ' : ''}${cat.label} 공간 사진 ${images.length}장.`;
+const articleBody = d.note ? `${d.summary} ${d.note}` : d.summary;
 const ogImage = `/work/${work.id}/og.jpg`;
 const jsonLd = [{
   '@type': 'BreadcrumbList',
@@ -32,7 +33,7 @@ const jsonLd = [{
 }, {
   '@type': 'ImageGallery',
   name: `${d.title} ${cat.label} 촬영`,
-  description: d.summary,
+  description: articleBody,
   url: new URL(workUrl(work), siteConfig.url).href,
   datePublished: `${d.year}-01-01`,
   author: { '@id': `${siteConfig.url}/#business` },
@@ -50,6 +51,7 @@ const jsonLd = [{
           <p class="eyebrow"><a href={categoryUrl(d.category)}>{cat.label}</a></p>
           <h1>{d.title}</h1>
           <p class="summary muted"><Sentences text={d.summary} /></p>
+          {d.note && <div class="note"><p class="eyebrow">Shooting note</p><p><Sentences text={d.note} /></p></div>}
           <dl class="facts">
             <div><dt>Year</dt><dd>{d.year}</dd></div>
             {d.location && <div><dt>Location</dt><dd>{d.location}</dd></div>}
@@ -144,6 +146,8 @@ const jsonLd = [{
   .eyebrow a { border-bottom: 1px solid currentColor; }
   h1 { font-size: clamp(30px, 3.4vw, 52px); }
   .summary { font-size: 16px; max-width: 30em; }
+  .note { border-top: 1px solid var(--line); padding-top: 18px; font-size: 15px; line-height: 1.8; max-width: 32em; }
+  .note .eyebrow { margin-bottom: 10px; }
   .facts { display: grid; gap: 10px; margin: 8px 0 0; padding-top: 18px; border-top: 1px solid var(--line); font-size: 14px; }
   .facts div { display: flex; justify-content: space-between; gap: 16px; }
   .facts dt { color: var(--muted); }

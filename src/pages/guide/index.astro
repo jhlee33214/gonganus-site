@@ -24,9 +24,19 @@ const guides = (await getCollection('guides')).sort((a, b) => a.data.order - b.d
       </ol>
     </div>
   </section>
+  <section class="section tight">
+    <div class="container">
+      <p class="eyebrow" data-reveal>지역별 촬영</p>
+      <ul class="areas" data-reveal>
+        <li><a class="link" href="/area/seoul/">서울 인테리어 촬영 →</a></li>
+        <li><a class="link" href="/area/gyeonggi/">경기 인테리어·숙소 촬영 →</a></li>
+      </ul>
+    </div>
+  </section>
   <Cta />
 </Base>
 <style>
+  .areas { display: flex; gap: 32px; flex-wrap: wrap; font-size: 16px; }
   .list { margin-top: 48px; border-top: 1px solid var(--fg); }
   .list li { border-bottom: 1px solid var(--line); }
   .list a { display: grid; grid-template-columns: 56px 1fr 40px; gap: 16px; align-items: start; padding: 28px 0; transition: opacity .3s; }
