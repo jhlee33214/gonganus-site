@@ -174,7 +174,7 @@ const services = [
   .p-list li.active { opacity: 1; }
   .p-list h3 { font-size: clamp(20px, 1.8vw, 26px); margin-bottom: 12px; }
   .p-list p { max-width: 34em; }
-  @media (max-width: 1024px) { .principles { grid-template-columns: 1fr; } .p-media { display: none; } .p-list li { opacity: 1; } }
+  @media (max-width: 1024px) { .principles { grid-template-columns: 1fr; } .p-sticky { position: relative; top: 0; aspect-ratio: 4 / 3; } .p-list li { opacity: 1; } }
   @media (max-width: 1024px) { .strengths { grid-template-columns: repeat(2, 1fr); } .svc { grid-template-columns: 1fr; } .svc li + li { border-left: 0; } .svc a, .svc li:first-child a { padding: 24px 0 28px; } .svc .arrow { right: 0; top: 24px; } }
   @media (max-width: 768px) {
     .hero { min-height: 92svh; }
