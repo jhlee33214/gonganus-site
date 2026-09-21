@@ -32,6 +32,10 @@ const path = Astro.url.pathname;
   .header.on-dark { background: transparent; color: #fff; box-shadow: none; }
   .header.on-dark .logo-dark { display: none; }
   .header.on-dark .logo-light { display: block; }
+  .header.menu-open { background: var(--bg); color: var(--fg); }
+  .header.menu-open .logo-dark { display: block; }
+  .header.menu-open .logo-light { display: none; }
+  .header.menu-open .toggle span { background: var(--fg); }
   @media (max-width: 768px) { .logo { height: 52px; } }
   .header.on-dark .toggle span, .header.on-dark .nav a::after { background: #fff; }
   .header.scrolled { box-shadow: 0 1px 0 var(--line); }
@@ -51,7 +55,7 @@ const path = Astro.url.pathname;
     .nav { position: fixed; inset: 84px 0 0 0; background: var(--bg); flex-direction: column; align-items: flex-start; justify-content: center; gap: 8px; padding: 0 var(--gutter); font-size: clamp(30px, 8.5vw, 40px); letter-spacing: -0.03em; font-weight: 500; visibility: hidden; opacity: 0; transition: opacity .35s var(--ease), visibility 0s .35s; }
     .nav a { transform: translateY(24px); opacity: 0; transition: transform .6s var(--ease), opacity .6s var(--ease); transition-delay: calc(var(--i) * 50ms + 80ms); }
     .nav a::after { display: none; }
-    .nav.open { visibility: visible; opacity: 1; transition: opacity .35s var(--ease), visibility 0s; }
+    .nav.open { visibility: visible; opacity: 1; color: var(--fg); transition: opacity .35s var(--ease), visibility 0s; }
     .nav.open a { transform: none; opacity: 1; }
     .toggle[aria-expanded="true"] span:first-child { transform: translateY(4.25px) rotate(45deg); }
     .toggle[aria-expanded="true"] span:last-child { transform: translateY(-4.25px) rotate(-45deg); }
