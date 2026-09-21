@@ -6,7 +6,7 @@
   --soft: #ecebe6;
   --max: 1520px;
   --gutter: 40px;
-  --font: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, 'Apple SD Gothic Neo', sans-serif;
+  --font: 'Pretendard', 'Pretendard Full', -apple-system, BlinkMacSystemFont, system-ui, 'Apple SD Gothic Neo', sans-serif;
   --ease: cubic-bezier(.22, 1, .36, 1);
 }
 @media (max-width: 768px) { :root { --gutter: 20px; } }

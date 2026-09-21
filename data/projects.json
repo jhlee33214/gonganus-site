@@ -20,7 +20,7 @@
     "title": "오션키즈 키즈풀",
     "category": "commercial",
     "summary": "실내 키즈 수영장. 물의 반사와 공간의 색이 살아나도록 조명 조건을 정리해 촬영했습니다.",
-    "featured": true
+    "featured": false
   },
   {
     "slug": "showroom-knotty",
@@ -34,7 +34,7 @@
     "title": "카페 Y3S",
     "category": "cafe",
     "summary": "카페 Y3S. 창을 살린 노출로 실내와 바깥 풍경을 한 장에 담았습니다.",
-    "featured": true
+    "featured": false
   },
   {
     "slug": "cafe-fruitemagie",
@@ -63,7 +63,7 @@
     "category": "residence",
     "location": "서울 신당동",
     "summary": "아파트 인테리어 시공 사례. 벽과 창틀의 수직을 세워 시공사 포트폴리오용으로 기록했습니다.",
-    "featured": false
+    "featured": true
   },
   {
     "slug": "stay-officetel",
@@ -101,7 +101,7 @@
     "title": "그리디센트 워크숍",
     "category": "commercial",
     "summary": "향 공방 그리디센트의 워크숍. 작업대와 소품의 질감을 중심으로 기록했습니다.",
-    "featured": false
+    "featured": true
   },
   {
     "slug": "stay-anam-anwoljae",
@@ -109,7 +109,7 @@
     "category": "stay",
     "location": "서울 안암동",
     "summary": "한옥 숙박 안월재. 자연광과 전구색 조명을 광원별로 나누어 촬영하고 후반에서 블렌딩해, 한옥 특유의 색을 그대로 담았습니다.",
-    "featured": true
+    "featured": false
   },
   {
     "slug": "stay-namyangju-damyeonjae",
@@ -117,7 +117,7 @@
     "category": "stay",
     "location": "경기 남양주",
     "summary": "독채 숙박 담연재. 창밖 풍경을 살린 노출로 객실과 마당을 함께 기록했습니다.",
-    "featured": false
+    "featured": true
   },
   {
     "slug": "stay-paju-mukta",
