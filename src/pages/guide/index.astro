@@ -15,8 +15,7 @@ const guides = (await getCollection('guides')).sort((a, b) => a.data.order - b.d
           <li data-reveal>
             <a href={`/guide/${g.id}/`}>
               <span class="num">0{i + 1}</span>
-              <h2>{g.data.question}</h2>
-              <p class="muted"><Sentences text={g.data.answer.split(/(?<=[.!?])\s+/)[0]} /></p>
+              <div class="body"><h2>{g.data.question}</h2><p class="muted"><Sentences text={g.data.answer.split(/(?<=[.!?])\s+/)[0]} /></p></div>
               <span class="arrow">→</span>
             </a>
           </li>
@@ -44,6 +43,7 @@ const guides = (await getCollection('guides')).sort((a, b) => a.data.order - b.d
   .num { font-size: 12px; letter-spacing: .08em; color: var(--muted); padding-top: 8px; }
   .list h2 { font-size: clamp(20px, 2vw, 28px); margin-bottom: 8px; }
   .list p { max-width: 44em; }
+  .body { min-width: 0; }
   .arrow { font-size: 20px; padding-top: 4px; }
   @media (max-width: 640px) { .list a { grid-template-columns: 1fr; gap: 6px; } .arrow { display: none; } }
 </style>

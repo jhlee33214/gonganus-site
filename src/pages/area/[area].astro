@@ -23,7 +23,6 @@ const jsonLd = [
       <h1 data-reveal>{area.question}</h1>
       <p class="answer" data-reveal><Sentences text={area.answer} /></p>
       <dl class="facts" data-reveal>
-        <div><dt>촬영한 공간</dt><dd>{works.map((w) => w.data.title).join(', ')}</dd></div>
         <div><dt>공간 종류</dt><dd>{[...new Set(works.map((w) => CATEGORIES[w.data.category].label))].join(', ')}</dd></div>
         <div><dt>진행</dt><dd>문의 → 일정 확정 → 촬영(2~4시간) → 5일 이내 납품</dd></div>
         <div><dt>결과물</dt><dd>컷 수 제한 없는 보정 사진, 세로 또는 가로 영상, 사진+영상 패키지</dd></div>

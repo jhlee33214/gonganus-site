@@ -15,14 +15,14 @@ const { works, all } = Astro.props;
 const cat = CATEGORIES[category];
 const cats = Object.entries(CATEGORIES) as [CategoryKey, { label: string }][];
 ---
-<Base title={`${cat.label} 공간 촬영 — 공간어스`} description={`${cat.description} ${cat.label} 촬영 사례 ${works.length}곳.`}>
+<Base title={`${cat.label} 공간 촬영 — 공간어스`} description={`${cat.description} 공간어스의 ${cat.label} 촬영 사례.`}>
   <section class="section">
     <div class="container">
       <h1 data-reveal>{cat.label}</h1>
       <p class="lead muted" style="margin-top:12px"><Sentences text={cat.description} /></p>
       <nav class="cats" aria-label="분류">
-        <a href="/work/">전체 <span class="muted">{all.length}</span></a>
-        {cats.map(([k, c]) => { const n = all.filter((w) => w.data.category === k).length; return n ? <a href={categoryUrl(k)} aria-current={k === category ? 'page' : undefined}>{c.label} <span class="muted">{n}</span></a> : null; })}
+        <a href="/work/">전체</a>
+        {cats.map(([k, c]) => all.some((w) => w.data.category === k) ? <a href={categoryUrl(k)} aria-current={k === category ? 'page' : undefined}>{c.label}</a> : null)}
       </nav>
       <WorkGrid works={works} />
     </div>
