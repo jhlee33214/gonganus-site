@@ -5,12 +5,15 @@ import Seo from '../components/Seo.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 interface Props { title: string; description: string; image?: string; jsonLd?: object[]; }
+// head 슬롯: 페이지별 preload 등을 넣는다
 const { title, description, image, jsonLd } = Astro.props;
 ---
 <!doctype html>
 <html lang="ko">
   <head>
     <Seo title={title} description={description} image={image} jsonLd={jsonLd} />
+    <link rel="stylesheet" href="/fonts/pretendard.css" />
+    <slot name="head" />
     <ClientRouter />
   </head>
   <body>
