@@ -1,0 +1,44 @@
+---
+import Base from '../layouts/Base.astro';
+import Cta from '../components/Cta.astro';
+import { siteConfig } from '../site.config';
+const principles = [
+  { t: '수직을 세웁니다', d: '공간 사진에서 기울어진 수직선은 가장 먼저 눈에 띄는 결함입니다. 촬영 단계에서 카메라 수평을 잡고, 후보정에서 원근을 정리해 벽과 기둥, 창틀의 수직을 유지합니다.' },
+  { t: '빛을 섞지 않습니다', d: '대부분의 인테리어 공간에는 자연광과 전구색 조명, 주광색 LED가 동시에 존재합니다. 색온도가 뒤섞이면 애써 고른 마감재의 색이 무너집니다. 조명 조건을 정리하고, 필요하면 구간을 나누어 촬영한 뒤 합칩니다.' },
+  { t: '창을 살립니다', d: '실내에 노출을 맞추면 창이 하얗게 날아가고, 창에 맞추면 실내가 어두워집니다. 실내와 창밖을 따로 촬영해 합쳐, 공간이 실제로 보이는 그대로 밝고 바깥 풍경까지 담습니다.' },
+];
+const jsonLd = [{ '@type': 'AboutPage', name: '공간어스 소개', url: `${siteConfig.url}/about/`, about: { '@id': `${siteConfig.url}/#business` } }];
+---
+<Base title="소개 — 공간을 이해하고 기록하는 스튜디오 | 공간어스" description="공간어스는 공간을 기록하는 인테리어 촬영 스튜디오입니다. 영상 디자이너의 시선으로 공간을 보고, 촬영과 색보정, 편집까지 한 곳에서 다룹니다. 수직을 세우고, 빛을 섞지 않고, 창을 살리는 세 가지 원칙으로 촬영합니다." jsonLd={jsonLd}>
+  <section class="section">
+    <div class="container narrow">
+      <p class="eyebrow">About</p>
+      <h1>모든 공간에는 이유와 철학이 담겨 있습니다.<br />공간의 디테일을 기록하는 순간, 그 이유는 공감이 됩니다.</h1>
+      <div class="body">
+        <p>공간어스는 공간을 기록하는 스튜디오입니다. 영상 디자이너로 일해온 시선으로 공간을 바라보고, 촬영과 색보정, 편집까지 한 곳에서 처음부터 끝까지 다룹니다.</p>
+        <p>인테리어 회사의 시공 사례, 가구·조명 브랜드의 쇼룸, 카페와 숙박 공간을 사진과 영상으로 남깁니다. 잘 찍은 사진보다 정확한 사진을 목표로 합니다. 설계자가 고른 마감재의 색, 조명의 온도, 창으로 들어오는 빛이 실제와 같게 보이도록 촬영합니다.</p>
+      </div>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container">
+      <p class="eyebrow">Principles</p>
+      <h2>촬영 기준</h2>
+      <ol class="principles">
+        {principles.map((p, i) => <li><span class="num">0{i + 1}</span><h3>{p.t}</h3><p class="muted">{p.d}</p></li>)}
+      </ol>
+    </div>
+  </section>
+  <Cta />
+</Base>
+<style>
+  .narrow { max-width: 880px; margin-left: 0; }
+  h1 { font-size: clamp(24px, 2.6vw, 36px); }
+  .body { margin-top: 32px; display: grid; gap: 16px; font-size: 17px; line-height: 1.8; max-width: 40em; }
+  .principles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; margin-top: 40px; padding: 0; list-style: none; }
+  .principles li { border-top: 1px solid var(--line); padding-top: 20px; }
+  .num { display: block; font-size: 13px; color: var(--muted); margin-bottom: 12px; }
+  .principles h3 { margin-bottom: 10px; }
+  .principles p { font-size: 15px; }
+  @media (max-width: 768px) { .principles { grid-template-columns: 1fr; } }
+</style>

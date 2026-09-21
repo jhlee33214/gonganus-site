@@ -1,0 +1,26 @@
+---
+import Base from '../layouts/Base.astro';
+import VideoEmbed from '../components/VideoEmbed.astro';
+import Cta from '../components/Cta.astro';
+import videos from '../content/videos.json';
+const landscape = videos.filter((v) => v.ratio === '16:9');
+const portrait = videos.filter((v) => v.ratio === '9:16');
+---
+<Base title="공간 영상 — 공간어스 인테리어 영상 촬영" description={`공간어스가 촬영·편집한 카페, 쇼룸, 숙박, 주거 공간 영상 ${videos.length}편. 인스타그램 릴스용 세로 영상과 홈페이지용 가로 영상을 사진과 함께 한 번에 제작합니다.`}>
+  <section class="section">
+    <div class="container">
+      <h1>Video</h1>
+      <p class="lead muted" style="margin-top:12px">사진 촬영과 같은 날 진행하는 공간 영상입니다. 릴스·쇼츠용 세로 영상과 홈페이지·유튜브용 가로 영상을 편집까지 마쳐 2분 이내로 전달합니다.</p>
+      {landscape.length > 0 && <div class="vgrid land">{landscape.map((v) => <VideoEmbed {...v} ratio={v.ratio as '16:9' | '9:16'} />)}</div>}
+      {portrait.length > 0 && <div class="vgrid port">{portrait.map((v) => <VideoEmbed {...v} ratio={v.ratio as '16:9' | '9:16'} />)}</div>}
+    </div>
+  </section>
+  <Cta title="공간 영상이 필요하신가요?" />
+</Base>
+<style>
+  .vgrid { display: grid; gap: 32px 24px; margin-top: 40px; }
+  .land { grid-template-columns: repeat(2, 1fr); }
+  .port { grid-template-columns: repeat(4, 1fr); }
+  @media (max-width: 1024px) { .port { grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 768px) { .land { grid-template-columns: 1fr; } .port { grid-template-columns: repeat(2, 1fr); } }
+</style>

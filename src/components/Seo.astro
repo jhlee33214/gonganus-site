@@ -1,0 +1,44 @@
+---
+import { siteConfig } from '../site.config';
+interface Props { title: string; description: string; image?: string; jsonLd?: object[]; }
+const { title, description, image = '/og-default.jpg', jsonLd = [] } = Astro.props;
+const canonical = new URL(Astro.url.pathname, siteConfig.url).href;
+const ogImage = new URL(image, siteConfig.url).href;
+const business = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfessionalService',
+  '@id': `${siteConfig.url}/#business`,
+  name: siteConfig.name,
+  alternateName: siteConfig.nameEn,
+  description: siteConfig.description,
+  url: siteConfig.url,
+  email: siteConfig.email,
+  image: new URL('/og-default.jpg', siteConfig.url).href,
+  logo: new URL('/logo.svg', siteConfig.url).href,
+  areaServed: siteConfig.areaServed,
+  sameAs: [siteConfig.instagram, siteConfig.kakao],
+  knowsAbout: ['인테리어 사진 촬영', '공간 영상 촬영', '카페 촬영', '쇼룸 촬영', '숙박 공간 촬영'],
+};
+---
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>{title}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonical} />
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<link rel="sitemap" href="/sitemap-index.xml" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content={siteConfig.name} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonical} />
+<meta property="og:image" content={ogImage} />
+<meta property="og:locale" content="ko_KR" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={ogImage} />
+{siteConfig.verification.google && <meta name="google-site-verification" content={siteConfig.verification.google} />}
+{siteConfig.verification.naver && <meta name="naver-site-verification" content={siteConfig.verification.naver} />}
+<script type="application/ld+json" set:html={JSON.stringify(business)} />
+{jsonLd.map((obj) => <script type="application/ld+json" set:html={JSON.stringify({ '@context': 'https://schema.org', ...obj })} />)}

@@ -1,0 +1,34 @@
+---
+import Base from '../../../layouts/Base.astro';
+import WorkGrid from '../../../components/WorkGrid.astro';
+import Cta from '../../../components/Cta.astro';
+import { getAllWork, CATEGORIES, categoryUrl, type CategoryKey } from '../../../lib/work';
+export async function getStaticPaths() {
+  const all = await getAllWork();
+  return (Object.keys(CATEGORIES) as CategoryKey[])
+    .filter((k) => all.some((w) => w.data.category === k))
+    .map((category) => ({ params: { category }, props: { works: all.filter((w) => w.data.category === category), all } }));
+}
+const { category } = Astro.params as { category: CategoryKey };
+const { works, all } = Astro.props;
+const cat = CATEGORIES[category];
+const cats = Object.entries(CATEGORIES) as [CategoryKey, { label: string }][];
+---
+<Base title={`${cat.label} 공간 촬영 — 공간어스`} description={`${cat.description} 공간어스의 ${cat.label} 촬영 사례 ${works.length}곳.`}>
+  <section class="section">
+    <div class="container">
+      <h1>{cat.label}</h1>
+      <p class="lead muted" style="margin-top:12px">{cat.description}</p>
+      <nav class="cats" aria-label="분류">
+        <a href="/work/">전체 <span class="muted">{all.length}</span></a>
+        {cats.map(([k, c]) => { const n = all.filter((w) => w.data.category === k).length; return n ? <a href={categoryUrl(k)} aria-current={k === category ? 'page' : undefined}>{c.label} <span class="muted">{n}</span></a> : null; })}
+      </nav>
+      <WorkGrid works={works} />
+    </div>
+  </section>
+  <Cta />
+</Base>
+<style is:global>
+  .cats { display: flex; flex-wrap: wrap; gap: 8px 24px; margin: 24px 0 40px; font-size: 15px; font-weight: 500; }
+  .cats a[aria-current] { text-decoration: underline; text-underline-offset: 6px; }
+</style>

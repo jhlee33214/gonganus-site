@@ -1,0 +1,67 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import WorkGrid from '../components/WorkGrid.astro';
+import Cta from '../components/Cta.astro';
+import Logo from '../assets/logo.svg';
+import { siteConfig } from '../site.config';
+import { getAllWork, getFeaturedWork, getCover, workUrl } from '../lib/work';
+const featured = await getFeaturedWork(8);
+const hero = (await getAllWork())[0];
+const heroImage = getCover(hero.id, hero.data.cover);
+const strengths = [
+  { t: '사진과 영상을 한 번에', d: '한 번의 방문으로 사진과 영상을 동시에 촬영합니다. 따로 진행할 때보다 일정과 비용이 줄어듭니다.' },
+  { t: '촬영부터 편집까지 직접', d: '촬영, 색보정, 편집을 한 스튜디오가 처음부터 끝까지 다룹니다. 결과물의 톤이 흔들리지 않습니다.' },
+  { t: '5일 안에 납품', d: '여러 의뢰를 한꺼번에 받지 않고 한 공간에 집중합니다. 촬영 후 5일 안에 완성본을 보내드립니다.' },
+  { t: '합리적인 견적, 높은 완성도', d: '기본 보정과 세부 보정을 거친 사진 30장 이상, 편집을 마친 2분 이내 영상까지 한 번에 받으실 수 있습니다.' },
+];
+---
+<Base title="공간어스 gonganus | 인테리어·공간 사진 영상 촬영 스튜디오" description={siteConfig.description}>
+  <section class="hero">
+    <div class="container">
+      <Logo class="hero-logo" />
+      <p class="lead">{siteConfig.tagline}. 카페, 쇼룸, 숙박, 주거 공간을 인테리어 회사와 브랜드를 위해 사진과 영상으로 남깁니다.</p>
+    </div>
+    <a class="hero-image" href={workUrl(hero)} aria-label={`${hero.data.title} 보기`}>
+      <Image src={heroImage} alt={`${hero.data.title} 공간 사진`} widths={[960, 1440, 1920, 2560]} sizes="100vw" width={2560} height={1707} loading="eager" fetchpriority="high" />
+    </a>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="head">
+        <h2>최근 작업</h2>
+        <a href="/work/" class="more">전체 보기 →</a>
+      </div>
+      <WorkGrid works={featured} eagerCount={0} />
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <p class="eyebrow">Why gonganus</p>
+      <h2>공간어스는 어떤 점이 다를까요</h2>
+      <ul class="strengths">
+        {strengths.map((s, i) => <li><span class="num">0{i + 1}</span><h3>{s.t}</h3><p class="muted">{s.d}</p></li>)}
+      </ul>
+    </div>
+  </section>
+
+  <Cta />
+</Base>
+<style>
+  .hero { padding-top: clamp(40px, 6vw, 96px); }
+  .hero-logo { width: min(520px, 70vw); height: auto; margin-bottom: 28px; }
+  .hero .lead { margin-bottom: clamp(32px, 5vw, 64px); }
+  .hero-image { display: block; }
+  .hero-image img { width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover; }
+  .head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 28px; }
+  .more { font-size: 14px; font-weight: 500; }
+  .strengths { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; margin-top: 40px; }
+  .strengths li { border-top: 1px solid var(--line); padding-top: 20px; }
+  .num { display: block; font-size: 13px; color: var(--muted); margin-bottom: 12px; }
+  .strengths h3 { margin-bottom: 10px; }
+  .strengths p { font-size: 15px; }
+  @media (max-width: 1024px) { .strengths { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 640px) { .strengths { grid-template-columns: 1fr; gap: 24px; } }
+</style>

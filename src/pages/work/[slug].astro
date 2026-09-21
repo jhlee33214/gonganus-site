@@ -1,0 +1,73 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../../layouts/Base.astro';
+import Cta from '../../components/Cta.astro';
+import { siteConfig } from '../../site.config';
+import { getAllWork, getAdjacent, getProjectImages, CATEGORIES, categoryUrl, workUrl, getCover } from '../../lib/work';
+export async function getStaticPaths() {
+  return (await getAllWork()).map((w) => ({ params: { slug: w.id }, props: { work: w } }));
+}
+const { work } = Astro.props;
+const d = work.data;
+const images = getProjectImages(work.id);
+const cover = getCover(work.id, d.cover);
+const { prev, next } = await getAdjacent(work.id);
+const cat = CATEGORIES[d.category];
+// 가로 사진은 풀폭 1열, 세로 사진은 연속 2장을 2열로 묶는다.
+type Row = { kind: 'wide'; items: typeof images } | { kind: 'pair'; items: typeof images };
+const rows: Row[] = [];
+for (const img of images) {
+  const portrait = img.image.height > img.image.width;
+  const last = rows[rows.length - 1];
+  if (portrait && last?.kind === 'pair' && last.items.length === 1) last.items.push(img);
+  else rows.push({ kind: portrait ? 'pair' : 'wide', items: [img] });
+}
+const title = `${d.title} ${cat.label} 촬영 — 공간어스`;
+const description = `${d.summary} ${d.year}년 ${d.location ? d.location + ' ' : ''}${cat.label} 공간 사진 ${images.length}장.`;
+const ogImage = `/work/${work.id}/og.jpg`;
+const jsonLd = [{
+  '@type': 'ImageGallery',
+  name: `${d.title} ${cat.label} 촬영`,
+  description: d.summary,
+  url: new URL(workUrl(work), siteConfig.url).href,
+  datePublished: `${d.year}-01-01`,
+  author: { '@id': `${siteConfig.url}/#business` },
+  numberOfItems: images.length,
+}];
+---
+<Base title={title} description={description} image={ogImage} jsonLd={jsonLd}>
+  <article>
+    <header class="container head">
+      <p class="eyebrow"><a href={categoryUrl(d.category)}>{cat.label}</a> · {d.year}{d.location && ` · ${d.location}`}</p>
+      <h1>{d.title}</h1>
+      <p class="lead muted">{d.summary}</p>
+    </header>
+    <div class="container gallery">
+      {rows.map((row, ri) => (
+        <div class:list={['row', row.kind]}>
+          {row.items.map((img, ii) => {
+            const n = images.indexOf(img) + 1;
+            const w = row.kind === 'wide' ? 1920 : 960;
+            return <Image src={img.image} alt={`${d.title} 공간 사진 ${n}`} widths={row.kind === 'wide' ? [960, 1440, 1920, 2560] : [480, 960, 1440]} sizes={row.kind === 'wide' ? '(max-width: 1440px) 100vw, 1440px' : '(max-width: 640px) 100vw, 50vw'} width={w} height={Math.round(w * img.image.height / img.image.width)} loading={ri === 0 ? 'eager' : 'lazy'} />;
+          })}
+        </div>
+      ))}
+    </div>
+    <nav class="container adjacent" aria-label="다른 프로젝트">
+      {prev ? <a href={workUrl(prev)}><span class="muted">이전</span><br />{prev.data.title}</a> : <span />}
+      <a href="/work/" class="muted">전체 보기</a>
+      {next ? <a href={workUrl(next)} class="right"><span class="muted">다음</span><br />{next.data.title}</a> : <span />}
+    </nav>
+  </article>
+  <Cta title={`${cat.label} 공간 촬영이 필요하신가요?`} />
+</Base>
+<style>
+  .head { padding: clamp(40px, 6vw, 80px) var(--gutter) clamp(28px, 4vw, 48px); display: grid; gap: 14px; }
+  .eyebrow a { text-decoration: underline; text-underline-offset: 4px; }
+  .gallery { display: grid; gap: 24px; }
+  .row.pair { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .row img { width: 100%; height: auto; }
+  .adjacent { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 16px; padding-top: 48px; padding-bottom: 24px; font-size: 15px; font-weight: 500; }
+  .right { text-align: right; }
+  @media (max-width: 640px) { .row.pair { grid-template-columns: 1fr; gap: 20px; } .gallery { gap: 20px; } }
+</style>

@@ -1,0 +1,9 @@
+---
+import ProjectCard from './ProjectCard.astro';
+import type { Work } from '../lib/work';
+interface Props { works: Work[]; eagerCount?: number; }
+const { works, eagerCount = 3 } = Astro.props;
+---
+<div class="grid-3">
+  {works.map((w, i) => <ProjectCard work={w} eager={i < eagerCount} />)}
+</div>

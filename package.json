@@ -1,0 +1,23 @@
+{
+  "name": "gonganus-site",
+  "version": "1.0.0",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "scrape": "node scripts/scrape.mjs",
+    "download": "node scripts/download.mjs",
+    "gen": "node scripts/gen-content.mjs",
+    "check": "node scripts/check-dist.mjs"
+  },
+  "type": "module",
+  "dependencies": {
+    "@astrojs/sitemap": "^3.7.4",
+    "astro": "^7.3.3",
+    "sharp": "^0.35.4"
+  },
+  "private": true
+}

@@ -1,0 +1,33 @@
+---
+import Base from '../layouts/Base.astro';
+import { siteConfig } from '../site.config';
+const jsonLd = [{ '@type': 'ContactPage', name: '공간어스 문의', url: `${siteConfig.url}/contact/`, about: { '@id': `${siteConfig.url}/#business` } }];
+---
+<Base title="문의 — 촬영 견적·일정 | 공간어스" description="공간어스 촬영 문의. 카카오톡 채널이 가장 빠릅니다. 공간 종류·위치·평수·희망 일정을 보내주시면 하루 안에 견적을 드립니다. 이메일 studio@gonganus.com, 인스타그램 @gonganus." jsonLd={jsonLd}>
+  <section class="section">
+    <div class="container wrap">
+      <div>
+        <p class="eyebrow">Contact</p>
+        <h1>촬영 문의는<br />카카오톡 채널이 가장 빠릅니다.</h1>
+        <p class="lead muted" style="margin-top:20px">공간 종류, 위치, 평수, 원하는 결과물(사진 / 영상 / 패키지), 희망 일정을 보내주세요. 하루 안에 견적과 가능한 일정을 답해드립니다.</p>
+        <div class="actions">
+          <a class="btn primary lg" href={siteConfig.kakao} target="_blank" rel="noopener">카카오톡 채널로 문의하기</a>
+        </div>
+      </div>
+      <ul class="ways">
+        <li><span class="muted">Email</span><a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a></li>
+        <li><span class="muted">Instagram</span><a href={siteConfig.instagram} target="_blank" rel="noopener">@gonganus</a></li>
+        <li><span class="muted">활동 지역</span><span>{siteConfig.areaServed}</span></li>
+        <li><span class="muted">답변</span><span>영업일 기준 24시간 이내</span></li>
+      </ul>
+    </div>
+  </section>
+</Base>
+<style>
+  .wrap { display: grid; grid-template-columns: 1.4fr 1fr; gap: 64px; align-items: start; min-height: 50vh; }
+  .actions { margin-top: 32px; }
+  .ways { display: grid; gap: 20px; border-top: 1px solid var(--line); padding-top: 24px; font-size: 17px; }
+  .ways li { display: grid; gap: 4px; }
+  .ways .muted { font-size: 13px; }
+  @media (max-width: 768px) { .wrap { grid-template-columns: 1fr; gap: 40px; } }
+</style>

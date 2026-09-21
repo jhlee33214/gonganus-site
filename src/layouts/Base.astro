@@ -1,0 +1,19 @@
+---
+import '../styles/global.css';
+import Seo from '../components/Seo.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+interface Props { title: string; description: string; image?: string; jsonLd?: object[]; }
+const { title, description, image, jsonLd } = Astro.props;
+---
+<!doctype html>
+<html lang="ko">
+  <head>
+    <Seo title={title} description={description} image={image} jsonLd={jsonLd} />
+  </head>
+  <body>
+    <Header />
+    <main class="fade-in"><slot /></main>
+    <Footer />
+  </body>
+</html>

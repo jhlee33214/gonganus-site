@@ -1,0 +1,28 @@
+---
+import { siteConfig, nav } from '../site.config';
+---
+<footer class="footer">
+  <div class="container inner">
+    <div>
+      <p class="name">{siteConfig.name} <span class="muted">{siteConfig.nameEn}</span></p>
+      <p class="muted">{siteConfig.tagline}</p>
+    </div>
+    <ul class="links">
+      <li><a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a></li>
+      <li><a href={siteConfig.instagram} target="_blank" rel="noopener">Instagram @gonganus</a></li>
+      <li><a href={siteConfig.kakao} target="_blank" rel="noopener">카카오톡 채널</a></li>
+    </ul>
+    <ul class="links">
+      {nav.map((n) => <li><a href={n.href}>{n.label}</a></li>)}
+    </ul>
+  </div>
+  <div class="container copy muted">© {new Date().getFullYear()} {siteConfig.name}. All rights reserved.</div>
+</footer>
+<style>
+  .footer { border-top: 1px solid var(--line); padding: 48px 0 32px; font-size: 14px; }
+  .inner { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 32px; }
+  .name { font-weight: 500; font-size: 16px; }
+  .links li + li { margin-top: 6px; }
+  .copy { margin-top: 40px; font-size: 12px; }
+  @media (max-width: 640px) { .inner { grid-template-columns: 1fr; gap: 24px; } }
+</style>
