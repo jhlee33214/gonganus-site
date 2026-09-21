@@ -1,11 +1,10 @@
 ---
 import { siteConfig, nav } from '../site.config';
-import Logo from '../assets/logo-header.svg';
 const path = Astro.url.pathname;
 ---
 <header class="header" id="site-header">
   <div class="container bar">
-    <a href="/" class="brand" aria-label={`${siteConfig.name} 홈`}><Logo class="logo" /></a>
+    <a href="/" class="brand" aria-label={`${siteConfig.name} 홈`}><img class="logo logo-dark" src="/logo.png" alt="gonganus" width="843" height="566" decoding="async" /><img class="logo logo-light" src="/logo-white.png" alt="" aria-hidden="true" width="843" height="566" decoding="async" /></a>
     <nav class="nav" id="nav" aria-label="주 메뉴">
       {nav.map((n, i) => <a href={n.href} aria-current={path.startsWith(n.href) ? 'page' : undefined} style={`--i:${i}`}>{n.label}</a>)}
     </nav>
@@ -31,17 +30,16 @@ const path = Astro.url.pathname;
 <style>
   .header { position: sticky; top: 0; z-index: 20; background: var(--bg); transition: transform .5s var(--ease), box-shadow .5s var(--ease), background .4s var(--ease), color .4s var(--ease); }
   .header.on-dark { background: transparent; color: #fff; box-shadow: none; }
-  .header.on-dark .logo :global(use) { fill: #fff !important; }
-  .header.on-dark .logo :global(.ring) { stroke: #fff !important; }
-  @media (max-width: 768px) { .logo { height: 58px; } .logo :global(.ring) { stroke-width: 8.5; } }
+  .header.on-dark .logo-dark { display: none; }
+  .header.on-dark .logo-light { display: block; }
+  @media (max-width: 768px) { .logo { height: 52px; } }
   .header.on-dark .toggle span, .header.on-dark .nav a::after { background: #fff; }
   .header.scrolled { box-shadow: 0 1px 0 var(--line); }
   .header.hidden { transform: translateY(-100%); }
   .bar { display: flex; align-items: center; justify-content: space-between; height: 84px; }
   .brand { display: block; line-height: 0; }
-  .logo { height: 66px; width: auto; shape-rendering: geometricPrecision; }
-  .logo :global(.ring) { stroke-width: 7.5; vector-effect: none; }
-  .logo :global(.r4), .logo :global(.r5) { display: none; }
+  .logo { height: 60px; width: auto; }
+  .logo-light { display: none; }
   .nav { display: flex; gap: 34px; font-size: 14px; font-weight: 500; letter-spacing: .01em; }
   .nav a { position: relative; padding: 4px 0; }
   .nav a::after { content: ''; position: absolute; left: 0; bottom: 0; width: 100%; height: 1px; background: var(--fg); transform: scaleX(0); transform-origin: right; transition: transform .4s var(--ease); }

@@ -3,13 +3,13 @@ import Base from '../layouts/Base.astro';
 import { siteConfig } from '../site.config';
 const jsonLd = [{ '@type': 'ContactPage', name: '공간어스 문의', url: `${siteConfig.url}/contact/`, about: { '@id': `${siteConfig.url}/#business` } }];
 ---
-<Base title="문의 — 촬영 견적·일정 | 공간어스" description="공간어스 촬영 문의. 카카오톡 채널이 가장 빠릅니다. 공간 종류·위치·평수·희망 일정을 보내주시면 빠른 시간 안에 견적을 드립니다. 이메일 studio@gonganus.com" jsonLd={jsonLd}>
+<Base title="문의 — 촬영 견적 / 일정 | 공간어스" description="공간어스 촬영 문의. 카카오톡 채널이 가장 빠릅니다. 공간 종류 / 위치 / 평수 / 희망 일정을 보내주시면 빠른 시간 안에 견적을 드립니다. 이메일 studio@gonganus.com" jsonLd={jsonLd}>
   <section class="section">
     <div class="container wrap">
       <div>
         <p class="eyebrow">Contact</p>
         <h1 data-reveal>촬영 문의는<br />카카오톡 채널이 가장 빠릅니다.</h1>
-        <p class="lead muted" style="margin-top:20px">공간 종류·위치·평수, 원하는 결과물(사진 / 영상 / 패키지), 희망 일정을 보내주세요.<br />빠른 시간 안에 견적과 가능한 일정을 답변드립니다.</p>
+        <p class="lead muted" style="margin-top:20px">공간 종류 / 위치 / 평수, 원하는 결과물(사진 / 영상 / 패키지), 희망 일정을 보내주세요.<br />빠른 시간 안에 견적과 가능한 일정을 답변드립니다.</p>
         <div class="actions">
           <a class="btn primary lg" href={siteConfig.kakao} target="_blank" rel="noopener">카카오톡 채널 ↗</a>
         </div>

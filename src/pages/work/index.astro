@@ -6,7 +6,7 @@ import { getAllWork, CATEGORIES, categoryUrl } from '../../lib/work';
 const works = await getAllWork();
 const cats = Object.entries(CATEGORIES) as [keyof typeof CATEGORIES, { label: string }][];
 ---
-<Base title="포트폴리오 | 공간어스 인테리어 촬영 사례" description={`공간어스가 촬영한 카페·쇼룸·숙박·주거 공간 ${works.length}곳의 사진 포트폴리오. 인테리어 회사와 브랜드를 위한 공간 촬영 사례를 분류별로 봅니다.`}>
+<Base title="포트폴리오 | 공간어스 인테리어 촬영 사례" description={`공간어스가 촬영한 카페 / 쇼룸 / 숙박 / 주거 공간 ${works.length}곳의 사진 포트폴리오. 인테리어 회사와 브랜드를 위한 공간 촬영 사례를 분류별로 봅니다.`}>
   <section class="section">
     <div class="container">
       <h1 data-reveal>Work</h1>

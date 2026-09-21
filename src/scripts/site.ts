@@ -95,8 +95,8 @@ function mailCopy() {
     a.dataset.copyBound = '1';
     a.addEventListener('click', () => {
       const addr = a.getAttribute('href')!.replace(/^mailto:/, '');
-      toast(`이메일 · ${addr}`);
-      navigator.clipboard?.writeText?.(addr).then(() => toast(`이메일 주소를 복사했습니다 · ${addr}`)).catch(() => {});
+      toast(`이메일 / ${addr}`);
+      navigator.clipboard?.writeText?.(addr).then(() => toast(`이메일 주소를 복사했습니다 / ${addr}`)).catch(() => {});
     });
   });
 }
