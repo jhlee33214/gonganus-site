@@ -14,7 +14,7 @@ const { works, all } = Astro.props;
 const cat = CATEGORIES[category];
 const cats = Object.entries(CATEGORIES) as [CategoryKey, { label: string }][];
 ---
-<Base title={`${cat.label} 공간 촬영 — 공간어스`} description={`${cat.description} 공간어스의 ${cat.label} 촬영 사례 ${works.length}곳.`}>
+<Base title={`${cat.label} 공간 촬영 — 공간어스`} description={`${cat.description} ${cat.label} 촬영 사례 ${works.length}곳.`}>
   <section class="section">
     <div class="container">
       <h1>{cat.label}</h1>

@@ -3,7 +3,7 @@ export const siteConfig = {
   name: '공간어스',
   nameEn: 'gonganus',
   tagline: '공간을 이해하고 기록합니다',
-  description: '공간어스는 카페·쇼룸·숙박·주거 공간을 사진과 영상으로 기록하는 인테리어 촬영 스튜디오입니다. 인테리어 회사와 브랜드를 위한 공간 사진·영상 촬영, 서울·수도권 및 전국 출장.',
+  description: '카페·쇼룸·숙박·주거 공간을 사진과 영상으로 기록하는 인테리어 촬영 스튜디오. 인테리어 회사와 브랜드를 위한 공간 촬영, 촬영 후 5일 내 납품, 서울·수도권 및 전국 출장.',
   url: 'https://gonganus.com',
   email: 'studio@gonganus.com',
   kakao: 'https://pf.kakao.com/_nrYHG',

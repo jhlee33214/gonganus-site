@@ -16,11 +16,11 @@ const strengths = [
   { t: '합리적인 견적, 높은 완성도', d: '기본 보정과 세부 보정을 거친 사진 30장 이상, 편집을 마친 2분 이내 영상까지 한 번에 받으실 수 있습니다.' },
 ];
 ---
-<Base title="공간어스 gonganus | 인테리어·공간 사진 영상 촬영 스튜디오" description={siteConfig.description}>
+<Base title="공간어스 | 인테리어·공간 사진 영상 촬영 스튜디오" description={siteConfig.description}>
   <section class="hero">
     <div class="container">
       <Logo class="hero-logo" />
-      <p class="lead">{siteConfig.tagline}. 카페, 쇼룸, 숙박, 주거 공간을 인테리어 회사와 브랜드를 위해 사진과 영상으로 남깁니다.</p>
+      <h1 class="lead">{siteConfig.tagline}. 카페, 쇼룸, 숙박, 주거 공간을 인테리어 회사와 브랜드를 위해 사진과 영상으로 남깁니다.</h1>
     </div>
     <a class="hero-image" href={workUrl(hero)} aria-label={`${hero.data.title} 보기`}>
       <Image src={heroImage} alt={`${hero.data.title} 공간 사진`} widths={[960, 1440, 1920, 2560]} sizes="100vw" width={2560} height={1707} loading="eager" fetchpriority="high" />
@@ -52,7 +52,7 @@ const strengths = [
 <style>
   .hero { padding-top: clamp(40px, 6vw, 96px); }
   .hero-logo { width: min(520px, 70vw); height: auto; margin-bottom: 28px; }
-  .hero .lead { margin-bottom: clamp(32px, 5vw, 64px); }
+  .hero .lead { margin-bottom: clamp(32px, 5vw, 64px); font-weight: 400; letter-spacing: 0; line-height: 1.75; }
   .hero-image { display: block; }
   .hero-image img { width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover; }
   .head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 28px; }
