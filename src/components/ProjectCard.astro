@@ -9,6 +9,7 @@ const [rw, rh] = ratio.split('/').map(Number);
 <a class="card" href={workUrl(work)} data-cursor="View ↗">
   <div class="thumb" style={`aspect-ratio:${rw}/${rh}`} data-reveal="wipe" transition:name={`cover-${work.id}`}>
     <Image src={cover} alt={`${work.data.title} 공간 사진`} widths={[480, 960, 1440, 1920]} sizes={sizes} width={1920} height={Math.round(1920 * rh / rw)} loading={eager ? 'eager' : 'lazy'} />
+    <div class="cap" aria-hidden="true"><span class="cap-title">{work.data.title}</span><span class="cap-cta">View project ↗</span></div>
   </div>
   <div class="meta" data-reveal>
     <span class="title">{index !== undefined && <span class="idx muted">{String(index + 1).padStart(2, '0')}</span>}{work.data.title}</span>
@@ -19,6 +20,11 @@ const [rw, rh] = ratio.split('/').map(Number);
   .card { display: block; }
   .thumb { position: relative; overflow: hidden; background: var(--soft); }
   .thumb img { width: 100%; height: 100%; object-fit: cover; }
+  .cap { position: absolute; inset: auto 0 0 0; padding: 40px 20px 18px; display: flex; justify-content: space-between; align-items: flex-end; gap: 12px; color: #fff; font-size: 14px; background: linear-gradient(180deg, rgba(0,0,0,0), rgba(0,0,0,.55)); opacity: 0; transform: translateY(12px); transition: opacity .5s var(--ease), transform .6s var(--ease); z-index: 1; }
+  .cap-title { font-weight: 500; letter-spacing: -0.01em; }
+  .cap-cta { font-size: 12px; letter-spacing: .04em; opacity: .85; }
+  .card:hover .cap { opacity: 1; transform: none; }
+  @media (hover: none) { .cap { display: none; } }
   .meta { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding: 14px 0 0; font-size: 14px; }
   .title { font-weight: 500; display: inline-flex; gap: 10px; align-items: baseline; }
   .idx { font-size: 11px; letter-spacing: .08em; }

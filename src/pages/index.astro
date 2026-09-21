@@ -15,10 +15,10 @@ const strengths = [
   { t: '사진과 영상, 한 번의 촬영으로', d: '한 번의 방문으로 사진과 영상을 함께 촬영합니다. 일정은 하루로, 결과물의 톤은 하나로 맞춥니다.' },
   { t: '촬영부터 편집까지 한 곳에서', d: '촬영, 색보정, 편집을 한 곳에서 마무리합니다. 공정이 나뉘지 않아 완성도가 흔들리지 않습니다.' },
   { t: '촬영 후 5일 안에 납품', d: '한 번에 한 공간에만 집중합니다. 보정과 편집을 마친 완성본을 촬영 후 5일 안에 전달합니다.' },
-  { t: '공간에 맞는 견적', d: '보정을 마친 사진 30장 이상과 2분 이내의 영상을 기본으로, 공간과 용도에 맞춰 견적을 드립니다.' },
+  { t: '컷 수 제한 없이', d: '공간마다 분위기와 인테리어가 다릅니다. 장수를 정해두지 않고, 그 공간이 가진 장면을 최대한 많이 담습니다.' },
 ];
 const services = [
-  { n: '01', t: '공간 사진', d: '수직과 원근을 정리하고 조명 색을 맞춘 인테리어 사진. 보정을 마친 30장 이상.' },
+  { n: '01', t: '공간 사진', d: '수직과 원근을 정리하고 조명 색을 맞춘 인테리어 사진. 컷 수 제한 없이, 보정까지 마쳐 전달합니다.' },
   { n: '02', t: '공간 영상', d: '동선과 빛을 따라가는 짧은 영상. 릴스·쇼츠용 세로, 웹·유튜브용 가로 포맷.' },
   { n: '03', t: '사진 + 영상 패키지', d: '한 번의 방문으로 두 결과물을 같은 빛, 같은 톤으로. 가장 많이 선택하는 방식.' },
 ];
@@ -84,7 +84,7 @@ const services = [
   <Cta />
 </Base>
 <style>
-  .hero { position: relative; min-height: 100svh; display: flex; align-items: flex-end; color: #fff; overflow: hidden; margin-top: -72px; }
+  .hero { position: relative; min-height: 100svh; display: flex; align-items: flex-end; color: #fff; overflow: hidden; margin-top: -84px; }
   .hero-media { position: absolute; inset: 0; background: #111; }
   .hero-media img { width: 100%; height: 100%; object-fit: cover; transform: scale(1.16); will-change: transform; animation: kb 1.8s var(--ease) both; }
   @keyframes kb { from { transform: scale(1.3); opacity: 0; } }
