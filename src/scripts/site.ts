@@ -2,12 +2,18 @@
 // ClientRouter(뷰 트랜지션)로 페이지가 바뀔 때마다 init()이 다시 실행된다.
 import Lenis from 'lenis';
 
+// 새로고침·뒤로가기 때 이전 스크롤 위치를 복원하지 않고 항상 맨 위에서 시작한다.
+if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+window.scrollTo(0, 0);
+window.addEventListener('pageshow', () => { window.scrollTo(0, 0); lenis?.scrollTo(0, { immediate: true }); });
+
 const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 let lenis: Lenis | null = null;
 
 function smooth() {
   if (reduced || lenis) return;
   lenis = new Lenis({ lerp: 0.09, wheelMultiplier: 1, touchMultiplier: 1.4 });
+  lenis.scrollTo(0, { immediate: true });
   const raf = (t: number) => { lenis!.raf(t); requestAnimationFrame(raf); };
   requestAnimationFrame(raf);
 }
