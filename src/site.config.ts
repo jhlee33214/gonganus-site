@@ -10,7 +10,7 @@ export const siteConfig = {
   instagram: 'https://www.instagram.com/gonganus',
   areaServed: '서울 / 수도권, 전국 출장',
   // 구글 서치콘솔 / 네이버 서치어드바이저 "HTML 태그" 인증값. 비워두면 출력하지 않는다.
-  verification: { google: '', naver: '' },
+  verification: { google: '', naver: 'c4faf68a1248a2befd07eb4ba8818020b883dcf4' },
 };
 
 export const nav = [
