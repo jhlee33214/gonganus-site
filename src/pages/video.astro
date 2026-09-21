@@ -7,18 +7,18 @@ const landscape = videos.filter((v) => v.ratio === '16:9');
 const portrait = videos.filter((v) => v.ratio === '9:16');
 ---
 <Base title="영상 | 공간어스 인테리어·공간 영상 촬영" description={`공간어스가 촬영·편집한 카페, 쇼룸, 숙박, 주거 공간 영상 ${videos.length}편. 릴스용 세로 영상과 홈페이지용 가로 영상을 사진과 같은 날 제작합니다.`}>
-  <section class="section">
+  <section class="section dark grain">
     <div class="container">
-      <h1>Video</h1>
-      <p class="lead muted" style="margin-top:12px">사진 촬영과 같은 날 진행하는 공간 영상입니다. 릴스·쇼츠용 세로 영상과 홈페이지·유튜브용 가로 영상을 편집까지 마쳐 2분 이내로 전달합니다.</p>
-      {landscape.length > 0 && <div class="vgrid land">{landscape.map((v) => <VideoEmbed {...v} ratio={v.ratio as '16:9' | '9:16'} />)}</div>}
-      {portrait.length > 0 && <div class="vgrid port">{portrait.map((v) => <VideoEmbed {...v} ratio={v.ratio as '16:9' | '9:16'} />)}</div>}
+      <h1 data-reveal>Video</h1>
+      <p class="lead muted" style="margin-top:16px">사진 촬영과 같은 날, 같은 빛 아래에서 촬영합니다. 릴스·쇼츠용 세로와 웹·유튜브용 가로 두 가지 포맷으로, 편집을 마친 2분 이내의 완성본을 전달합니다.</p>
+      {landscape.length > 0 && <div class="vgrid land stagger">{landscape.map((v) => <VideoEmbed {...v} ratio={v.ratio as '16:9' | '9:16'} />)}</div>}
+      {portrait.length > 0 && <div class="vgrid port stagger">{portrait.map((v) => <VideoEmbed {...v} ratio={v.ratio as '16:9' | '9:16'} />)}</div>}
     </div>
   </section>
-  <Cta title="공간 영상이 필요하신가요?" />
+  <Cta title="공간 영상이 필요하다면" />
 </Base>
 <style>
-  .vgrid { display: grid; gap: 32px 24px; margin-top: 40px; }
+  .vgrid { display: grid; gap: 40px 24px; margin-top: 48px; }
   .land { grid-template-columns: repeat(2, 1fr); }
   .port { grid-template-columns: repeat(4, 1fr); }
   @media (max-width: 1024px) { .port { grid-template-columns: repeat(3, 1fr); } }

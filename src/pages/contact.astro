@@ -8,17 +8,17 @@ const jsonLd = [{ '@type': 'ContactPage', name: '공간어스 문의', url: `${s
     <div class="container wrap">
       <div>
         <p class="eyebrow">Contact</p>
-        <h1>촬영 문의는<br />카카오톡 채널이 가장 빠릅니다.</h1>
-        <p class="lead muted" style="margin-top:20px">공간 종류, 위치, 평수, 원하는 결과물(사진 / 영상 / 패키지), 희망 일정을 보내주세요. 하루 안에 견적과 가능한 일정을 답해드립니다.</p>
+        <h1 data-reveal>촬영 문의는<br />카카오톡 채널이 가장 빠릅니다.</h1>
+        <p class="lead muted" style="margin-top:20px">공간 종류·위치·평수, 원하는 결과물(사진 / 영상 / 패키지), 희망 일정을 보내주세요. 하루 안에 견적과 가능한 일정을 답변드립니다.</p>
         <div class="actions">
-          <a class="btn primary lg" href={siteConfig.kakao} target="_blank" rel="noopener">카카오톡 채널로 문의하기</a>
+          <a class="btn primary lg" href={siteConfig.kakao} target="_blank" rel="noopener">카카오톡 채널 ↗</a>
         </div>
       </div>
-      <ul class="ways">
-        <li><span class="muted">Email</span><a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a></li>
-        <li><span class="muted">Instagram</span><a href={siteConfig.instagram} target="_blank" rel="noopener">@gonganus</a></li>
-        <li><span class="muted">활동 지역</span><span>{siteConfig.areaServed}</span></li>
-        <li><span class="muted">답변</span><span>영업일 기준 24시간 이내</span></li>
+      <ul class="ways stagger">
+        <li data-reveal><span class="muted">Email</span><a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a></li>
+        <li data-reveal><span class="muted">Instagram</span><a href={siteConfig.instagram} target="_blank" rel="noopener">@gonganus</a></li>
+        <li data-reveal><span class="muted">활동 지역</span><span>{siteConfig.areaServed}</span></li>
+        <li data-reveal><span class="muted">답변</span><span>영업일 기준 24시간 이내</span></li>
       </ul>
     </div>
   </section>

@@ -9,12 +9,12 @@ const cats = Object.entries(CATEGORIES) as [keyof typeof CATEGORIES, { label: st
 <Base title="포트폴리오 | 공간어스 인테리어 촬영 사례" description={`공간어스가 촬영한 카페·쇼룸·숙박·주거 공간 ${works.length}곳의 사진 포트폴리오. 인테리어 회사와 브랜드를 위한 공간 촬영 사례를 분류별로 봅니다.`}>
   <section class="section">
     <div class="container">
-      <h1>Work</h1>
+      <h1 data-reveal>Work</h1>
       <nav class="cats" aria-label="분류">
         <a href="/work/" aria-current="page">전체 <span class="muted">{works.length}</span></a>
         {cats.map(([k, c]) => { const n = works.filter((w) => w.data.category === k).length; return n ? <a href={categoryUrl(k)}>{c.label} <span class="muted">{n}</span></a> : null; })}
       </nav>
-      <WorkGrid works={works} />
+      <WorkGrid works={works} numbered />
     </div>
   </section>
   <Cta />

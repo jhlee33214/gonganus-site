@@ -2,13 +2,13 @@
 interface Props { title: string; year?: number | null; embed: string; ratio: '16:9' | '9:16'; }
 const { title, year, embed, ratio } = Astro.props;
 ---
-<figure class:list={['video', ratio === '9:16' ? 'portrait' : 'landscape']}>
+<figure data-reveal class:list={['video', ratio === '9:16' ? 'portrait' : 'landscape']}>
   <div class="frame"><iframe src={embed} title={title} loading="lazy" allowfullscreen allow="fullscreen; autoplay"></iframe></div>
   <figcaption>{year && <span class="muted">{year} </span>}{title}</figcaption>
 </figure>
 <style>
   .video { margin: 0; }
-  .frame { position: relative; background: #111; }
+  .frame { position: relative; background: #111; box-shadow: 0 30px 60px -30px rgba(0,0,0,.6); }
   .landscape .frame { aspect-ratio: 16 / 9; }
   .portrait .frame { aspect-ratio: 9 / 16; }
   iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }

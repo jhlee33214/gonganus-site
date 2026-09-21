@@ -1,28 +1,36 @@
 ---
 import { siteConfig, nav } from '../site.config';
+import Logo from '../assets/logo.svg';
 ---
-<footer class="footer">
-  <div class="container inner">
-    <div>
-      <p class="name">{siteConfig.name} <span class="muted">{siteConfig.nameEn}</span></p>
-      <p class="muted">{siteConfig.tagline}</p>
+<footer class="footer dark">
+  <div class="container">
+    <div class="top">
+      <div>
+        <p class="eyebrow">Contact</p>
+        <a class="mail" href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>
+      </div>
+      <ul class="links">
+        {nav.map((n) => <li><a href={n.href}>{n.label}</a></li>)}
+      </ul>
+      <ul class="links">
+        <li><a href={siteConfig.instagram} target="_blank" rel="noopener">Instagram</a></li>
+        <li><a href={siteConfig.kakao} target="_blank" rel="noopener">KakaoTalk</a></li>
+      </ul>
     </div>
-    <ul class="links">
-      <li><a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a></li>
-      <li><a href={siteConfig.instagram} target="_blank" rel="noopener">Instagram @gonganus</a></li>
-      <li><a href={siteConfig.kakao} target="_blank" rel="noopener">카카오톡 채널</a></li>
-    </ul>
-    <ul class="links">
-      {nav.map((n) => <li><a href={n.href}>{n.label}</a></li>)}
-    </ul>
+    <Logo class="wordmark" />
+    <div class="bottom muted">
+      <span>{siteConfig.name} · {siteConfig.areaServed}</span>
+      <span>© {new Date().getFullYear()} {siteConfig.nameEn}</span>
+    </div>
   </div>
-  <div class="container copy muted">© {new Date().getFullYear()} {siteConfig.name}. All rights reserved.</div>
 </footer>
 <style>
-  .footer { border-top: 1px solid var(--line); padding: 48px 0 32px; font-size: 14px; }
-  .inner { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 32px; }
-  .name { font-weight: 500; font-size: 16px; }
-  .links li + li { margin-top: 6px; }
-  .copy { margin-top: 40px; font-size: 12px; }
-  @media (max-width: 640px) { .inner { grid-template-columns: 1fr; gap: 24px; } }
+  .footer { padding: 72px 0 28px; }
+  .top { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 32px; align-items: start; }
+  .mail { font-size: clamp(20px, 2.2vw, 30px); font-weight: 500; letter-spacing: -0.02em; }
+  .links { font-size: 14px; font-weight: 500; }
+  .links li + li { margin-top: 8px; }
+  .wordmark { width: min(46vw, 620px); height: auto; margin: 72px auto 48px 0; filter: invert(1); opacity: .95; }
+  .bottom { display: flex; justify-content: space-between; gap: 16px; font-size: 12px; border-top: 1px solid var(--line); padding-top: 20px; }
+  @media (max-width: 640px) { .top { grid-template-columns: 1fr 1fr; } .top > div:first-child { grid-column: 1 / -1; } .wordmark { width: 80vw; } .bottom { flex-direction: column; } }
 </style>

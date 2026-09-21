@@ -13,19 +13,19 @@ const jsonLd = [{ '@type': 'AboutPage', name: '공간어스 소개', url: `${sit
   <section class="section">
     <div class="container narrow">
       <p class="eyebrow">About</p>
-      <h1>모든 공간에는 이유와 철학이 담겨 있습니다.<br />공간의 디테일을 기록하는 순간, 그 이유는 공감이 됩니다.</h1>
-      <div class="body">
-        <p>공간어스는 공간을 기록하는 스튜디오입니다. 영상 디자이너로 일해온 시선으로 공간을 바라보고, 촬영과 색보정, 편집까지 한 곳에서 처음부터 끝까지 다룹니다.</p>
-        <p>인테리어 회사의 시공 사례, 가구·조명 브랜드의 쇼룸, 카페와 숙박 공간을 사진과 영상으로 남깁니다. 잘 찍은 사진보다 정확한 사진을 목표로 합니다. 설계자가 고른 마감재의 색, 조명의 온도, 창으로 들어오는 빛이 실제와 같게 보이도록 촬영합니다.</p>
+      <h1 data-reveal>모든 공간에는 이유와 철학이 담겨 있습니다.<br />공간의 디테일을 기록하는 순간, 그 이유는 공감이 됩니다.</h1>
+      <div class="body" data-reveal>
+        <p>공간어스는 공간을 기록하는 스튜디오입니다. 영상 디자인에서 출발한 시선으로 공간을 바라보고, 촬영과 색보정, 편집을 한 곳에서 마무리합니다.</p>
+        <p>인테리어 회사의 시공 사례, 가구·조명 브랜드의 쇼룸, 카페와 숙박 공간을 기록합니다. 목표는 보기 좋은 사진이 아니라 정확한 사진입니다. 설계자가 고른 마감재의 색, 조명의 온도, 창으로 들어오는 빛이 실제와 같아야 합니다.</p>
       </div>
     </div>
   </section>
   <section class="section">
     <div class="container">
       <p class="eyebrow">Principles</p>
-      <h2>촬영 기준</h2>
-      <ol class="principles">
-        {principles.map((p, i) => <li><span class="num">0{i + 1}</span><h3>{p.t}</h3><p class="muted">{p.d}</p></li>)}
+      <h2 data-reveal>촬영 기준</h2>
+      <ol class="principles stagger">
+        {principles.map((p, i) => <li data-reveal><span class="num">0{i + 1}</span><h3>{p.t}</h3><p class="muted">{p.d}</p></li>)}
       </ol>
     </div>
   </section>

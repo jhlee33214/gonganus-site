@@ -1,25 +1,25 @@
 ---
 import { Image } from 'astro:assets';
 import { CATEGORIES, getCover, workUrl, type Work } from '../lib/work';
-interface Props { work: Work; eager?: boolean; }
-const { work, eager = false } = Astro.props;
+interface Props { work: Work; eager?: boolean; ratio?: '4/3' | '3/4' | '16/10' | '1/1'; sizes?: string; index?: number; }
+const { work, eager = false, ratio = '4/3', sizes = '(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw', index } = Astro.props;
 const cover = getCover(work.id, work.data.cover);
+const [rw, rh] = ratio.split('/').map(Number);
 ---
-<a class="card" href={workUrl(work)}>
-  <div class="thumb">
-    <Image src={cover} alt={`${work.data.title} 공간 사진`} widths={[480, 960, 1440]} sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw" width={1440} height={1080} loading={eager ? 'eager' : 'lazy'} />
+<a class="card" href={workUrl(work)} data-cursor="View">
+  <div class="thumb" style={`aspect-ratio:${rw}/${rh}`} data-reveal="wipe" transition:name={`cover-${work.id}`}>
+    <Image src={cover} alt={`${work.data.title} 공간 사진`} widths={[480, 960, 1440, 1920]} sizes={sizes} width={1920} height={Math.round(1920 * rh / rw)} loading={eager ? 'eager' : 'lazy'} />
   </div>
-  <div class="meta">
-    <span class="title">{work.data.title}</span>
+  <div class="meta" data-reveal>
+    <span class="title">{index !== undefined && <span class="idx muted">{String(index + 1).padStart(2, '0')}</span>}{work.data.title}</span>
     <span class="muted">{CATEGORIES[work.data.category].label} · {work.data.year}</span>
   </div>
 </a>
 <style>
   .card { display: block; }
-  .card:hover { opacity: 1; }
-  .thumb { aspect-ratio: 4 / 3; overflow: hidden; background: #f3f3f3; }
-  .thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s ease; }
-  .card:hover .thumb img { transform: scale(1.03); }
-  .meta { display: flex; justify-content: space-between; gap: 12px; padding: 12px 0 0; font-size: 14px; }
-  .title { font-weight: 500; }
+  .thumb { position: relative; overflow: hidden; background: var(--soft); }
+  .thumb img { width: 100%; height: 100%; object-fit: cover; }
+  .meta { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding: 14px 0 0; font-size: 14px; }
+  .title { font-weight: 500; display: inline-flex; gap: 10px; align-items: baseline; }
+  .idx { font-size: 11px; letter-spacing: .08em; }
 </style>

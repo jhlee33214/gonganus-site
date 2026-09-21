@@ -1,9 +1,20 @@
 ---
+// 에디토리얼 그리드: 12칸 기준으로 [8,4] [4,8] [4,4,4] 패턴을 반복해 크기가 다른 카드가 섞이게 한다.
 import ProjectCard from './ProjectCard.astro';
 import type { Work } from '../lib/work';
-interface Props { works: Work[]; eagerCount?: number; }
-const { works, eagerCount = 3 } = Astro.props;
+interface Props { works: Work[]; eagerCount?: number; numbered?: boolean; }
+const { works, eagerCount = 2, numbered = false } = Astro.props;
+const pattern: { span: number; ratio: '4/3' | '3/4' | '16/10' | '1/1'; sizes: string }[] = [
+  { span: 7, ratio: '4/3', sizes: '(max-width: 768px) 100vw, 58vw' }, { span: 5, ratio: '4/3', sizes: '(max-width: 768px) 100vw, 42vw' },
+  { span: 5, ratio: '4/3', sizes: '(max-width: 768px) 100vw, 42vw' }, { span: 7, ratio: '4/3', sizes: '(max-width: 768px) 100vw, 58vw' },
+  { span: 4, ratio: '4/3', sizes: '(max-width: 768px) 100vw, 33vw' }, { span: 4, ratio: '4/3', sizes: '(max-width: 768px) 100vw, 33vw' }, { span: 4, ratio: '4/3', sizes: '(max-width: 768px) 100vw, 33vw' },
+];
 ---
-<div class="grid-3">
-  {works.map((w, i) => <ProjectCard work={w} eager={i < eagerCount} />)}
+<div class="egrid stagger">
+  {works.map((w, i) => { const p = pattern[i % pattern.length]; return <div class="cell" style={`--span:${p.span}`}><ProjectCard work={w} eager={i < eagerCount} ratio={p.ratio} sizes={p.sizes} index={numbered ? i : undefined} /></div>; })}
 </div>
+<style>
+  .egrid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 40px 24px; align-items: end; }
+  .cell { grid-column: span var(--span); }
+  @media (max-width: 768px) { .egrid { grid-template-columns: 1fr; gap: 32px; } .cell { grid-column: auto; } }
+</style>

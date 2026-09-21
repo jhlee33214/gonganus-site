@@ -1,0 +1,9 @@
+---
+// 단어 단위 라인 리빌. 부모에 data-reveal="line"을 붙여 쓴다.
+interface Props { text: string; }
+const words = Astro.props.text.split(' ');
+---
+{words.map((w, i) => <span class="w"><span style={`--i:${i}`}>{w}</span></span>)}
+<style>
+  .w { margin-right: .28em; }
+</style>

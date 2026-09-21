@@ -1,42 +1,56 @@
 ---
 import { siteConfig, nav } from '../site.config';
-import Logo from '../assets/logo.svg';
+import Logo from '../assets/logo-mark.svg';
 const path = Astro.url.pathname;
 ---
-<header class="header">
+<header class="header" id="site-header">
   <div class="container bar">
     <a href="/" class="brand" aria-label={`${siteConfig.name} 홈`}><Logo class="logo" /></a>
     <nav class="nav" id="nav" aria-label="주 메뉴">
-      {nav.map((n) => <a href={n.href} aria-current={path.startsWith(n.href) ? 'page' : undefined}>{n.label}</a>)}
+      {nav.map((n, i) => <a href={n.href} aria-current={path.startsWith(n.href) ? 'page' : undefined} style={`--i:${i}`}>{n.label}</a>)}
     </nav>
-    <button class="toggle" id="toggle" aria-expanded="false" aria-controls="nav" aria-label="메뉴 열기">
-      <span></span><span></span>
-    </button>
+    <button class="toggle" id="toggle" aria-expanded="false" aria-controls="nav" aria-label="메뉴 열기"><span></span><span></span></button>
   </div>
 </header>
 <script>
-  const t = document.getElementById('toggle')!;
-  const n = document.getElementById('nav')!;
-  t.addEventListener('click', () => {
-    const open = n.classList.toggle('open');
-    t.setAttribute('aria-expanded', String(open));
-    t.setAttribute('aria-label', open ? '메뉴 닫기' : '메뉴 열기');
-    document.body.style.overflow = open ? 'hidden' : '';
-  });
+  function bind() {
+    const t = document.getElementById('toggle'), n = document.getElementById('nav'), h = document.getElementById('site-header');
+    if (!t || !n || !h) return;
+    t.onclick = () => {
+      const open = n.classList.toggle('open');
+      h.classList.toggle('menu-open', open);
+      h.classList.remove('hidden');
+      t.setAttribute('aria-expanded', String(open));
+      t.setAttribute('aria-label', open ? '메뉴 닫기' : '메뉴 열기');
+      document.body.style.overflow = open ? 'hidden' : '';
+    };
+  }
+  document.addEventListener('astro:page-load', bind);
+  document.addEventListener('astro:before-swap', () => { document.body.style.overflow = ''; });
 </script>
 <style>
-  .header { position: sticky; top: 0; z-index: 10; background: var(--bg); border-bottom: 1px solid var(--line); }
-  .bar { display: flex; align-items: center; justify-content: space-between; height: 76px; }
+  .header { position: sticky; top: 0; z-index: 20; background: var(--bg); transition: transform .5s var(--ease), box-shadow .5s var(--ease), background .4s var(--ease), color .4s var(--ease); }
+  .header.on-dark { background: transparent; color: #fff; box-shadow: none; }
+  .header.on-dark .logo { filter: invert(1); }
+  .header.on-dark .toggle span, .header.on-dark .nav a::after { background: #fff; }
+  .header.scrolled { box-shadow: 0 1px 0 var(--line); }
+  .header.hidden { transform: translateY(-100%); }
+  .bar { display: flex; align-items: center; justify-content: space-between; height: 72px; }
   .brand { display: block; line-height: 0; }
-  .logo { height: 46px; width: auto; }
-  .nav { display: flex; gap: 32px; font-size: 15px; font-weight: 500; letter-spacing: .01em; }
-  .nav a[aria-current] { text-decoration: underline; text-underline-offset: 6px; }
+  .logo { height: 40px; width: auto; }
+  .nav { display: flex; gap: 34px; font-size: 14px; font-weight: 500; letter-spacing: .01em; }
+  .nav a { position: relative; padding: 4px 0; }
+  .nav a::after { content: ''; position: absolute; left: 0; bottom: 0; width: 100%; height: 1px; background: var(--fg); transform: scaleX(0); transform-origin: right; transition: transform .4s var(--ease); }
+  .nav a:hover::after, .nav a[aria-current]::after { transform: scaleX(1); transform-origin: left; }
   .toggle { display: none; width: 44px; height: 44px; margin-right: -10px; border: 0; background: none; cursor: pointer; flex-direction: column; justify-content: center; gap: 7px; }
-  .toggle span { display: block; height: 1.5px; width: 22px; margin: 0 auto; background: var(--fg); transition: transform .25s; }
+  .toggle span { display: block; height: 1.5px; width: 22px; margin: 0 auto; background: var(--fg); transition: transform .3s var(--ease); }
   @media (max-width: 768px) {
     .toggle { display: flex; }
-    .nav { position: fixed; inset: 76px 0 0 0; background: var(--bg); flex-direction: column; align-items: center; justify-content: center; gap: 28px; font-size: 24px; transform: translateY(-110%); visibility: hidden; transition: transform .3s ease, visibility 0s .3s; }
-    .nav.open { transform: none; visibility: visible; transition: transform .3s ease, visibility 0s; }
+    .nav { position: fixed; inset: 72px 0 0 0; background: var(--bg); flex-direction: column; align-items: flex-start; justify-content: center; gap: 8px; padding: 0 var(--gutter); font-size: clamp(30px, 8.5vw, 40px); letter-spacing: -0.03em; font-weight: 500; visibility: hidden; opacity: 0; transition: opacity .35s var(--ease), visibility 0s .35s; }
+    .nav a { transform: translateY(24px); opacity: 0; transition: transform .6s var(--ease), opacity .6s var(--ease); transition-delay: calc(var(--i) * 50ms + 80ms); }
+    .nav a::after { display: none; }
+    .nav.open { visibility: visible; opacity: 1; transition: opacity .35s var(--ease), visibility 0s; }
+    .nav.open a { transform: none; opacity: 1; }
     .toggle[aria-expanded="true"] span:first-child { transform: translateY(4.25px) rotate(45deg); }
     .toggle[aria-expanded="true"] span:last-child { transform: translateY(-4.25px) rotate(-45deg); }
   }
