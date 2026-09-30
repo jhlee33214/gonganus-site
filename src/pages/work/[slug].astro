@@ -45,7 +45,7 @@ const jsonLd = [{
 <Base title={title} description={description} image={ogImage} jsonLd={jsonLd}>
   <article>
     <div class="cover" transition:name={`cover-${work.id}`}>
-      <Image src={cover} alt={`${d.title} 공간 사진 1`} widths={[960, 1440, 1920, 2560]} sizes="100vw" width={2560} height={Math.round(2560 * cover.height / cover.width)} loading="eager" fetchpriority="high" />
+      <Image src={cover} style={d.coverPosition ? `object-position:${d.coverPosition}` : undefined} alt={`${d.title} 공간 사진 1`} widths={[960, 1440, 1920, 2560]} sizes="100vw" width={2560} height={Math.round(2560 * cover.height / cover.width)} loading="eager" fetchpriority="high" />
     </div>
     <div class="container layout">
       <aside class="side">

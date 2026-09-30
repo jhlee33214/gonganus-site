@@ -15,7 +15,7 @@ for (const [i, m] of meta.entries()) {
   const fm = [
     `title: ${q(m.title)}`, `category: ${m.category}`, `year: ${year}`,
     m.location ? `location: ${q(m.location)}` : null,
-    `summary: ${q(m.summary)}`, notes[m.slug] ? `note: ${q(notes[m.slug])}` : null, `cover: ${q(m.cover ?? 'cover.jpg')}`,
+    `summary: ${q(m.summary)}`, notes[m.slug] ? `note: ${q(notes[m.slug])}` : null, `cover: ${q(m.cover ?? 'cover.jpg')}`, m.coverPosition ? `coverPosition: ${q(m.coverPosition)}` : null,
     `featured: ${!!m.featured}`, `order: ${i + 1}`,
   ].filter(Boolean).join('\n');
   writeFileSync(new URL(`../src/content/work/${m.slug}.md`, import.meta.url), `---\n${fm}\n---\n`);

@@ -14,6 +14,7 @@ const work = defineCollection({
     summary: z.string(),
     note: z.string().optional(),
     cover: z.string().default('01.jpg'),
+    coverPosition: z.string().optional(),
     featured: z.boolean().default(false),
     order: z.number().int(),
   }),

@@ -38,7 +38,7 @@ const services = [
   <section class="hero grain" data-hero-dark>
     <div class="hero-media" data-parallax style={`--n:${slides.length}`}>
       <div class="slide base"><Image src={heroImage} alt={`${hero.data.title} 공간 사진`} widths={[960, 1440, 1920]} sizes="100vw" width={1920} height={1280} quality={72} loading="eager" fetchpriority="high" /></div>
-      {slides.map((s, i) => <div class="slide" style={`--i:${i}`}><Image src={s.image} alt={`${s.work.data.title} 공간 사진`} widths={[960, 1440, 1920]} sizes="100vw" width={1920} height={1280} quality={72} loading="lazy" /></div>)}
+      {slides.map((s, i) => <div class="slide" style={`--i:${i}`}><Image src={s.image} style={s.work.data.coverPosition ? `object-position:${s.work.data.coverPosition}` : undefined} alt={`${s.work.data.title} 공간 사진`} widths={[960, 1440, 1920]} sizes="100vw" width={1920} height={1280} quality={72} loading="lazy" /></div>)}
     </div>
     <div class="container hero-content">
       <p class="eyebrow hero-eyebrow">Interior &amp; Space / Photography / Film</p>
