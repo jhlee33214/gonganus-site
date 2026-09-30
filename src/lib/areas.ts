@@ -10,7 +10,7 @@ export const AREAS: Area[] = [
     answer: '용산, 신당, 신촌, 안암, 노원 등 서울 곳곳의 카페와 쇼룸, 아파트, 숙소를 촬영해 왔습니다. 서울 전 지역 출장비 없이 진행하며, 공간 종류와 희망 일정을 보내주시면 빠른 시간 안에 견적을 드립니다.',
     description: '서울 인테리어 촬영. 용산 카페, 신당 아파트, 신촌 프랜차이즈 매장, 안암 한옥 숙소, 노원 오피스텔 등 서울 촬영 사례와 진행 방식.',
     districts: ['용산', '신당', '신촌', '안암', '노원'],
-    projects: ['cafe-majorica', 'apt-sindang-hyundai', 'franchise-greenboys', 'stay-anam-anwoljae', 'stay-officetel', 'showroom-duomo-lighting', 'showroom-knoll'],
+    projects: ['showroom-bb-italia', 'cafe-majorica', 'apt-sindang-hyundai', 'franchise-greenboys', 'stay-anam-anwoljae', 'stay-officetel', 'showroom-duomo-lighting', 'showroom-knoll'],
     keywords: ['서울 인테리어 촬영', '서울 카페 촬영', '서울 공간 사진', '서울 쇼룸 촬영'],
   },
   {

@@ -1,5 +1,14 @@
 [
   {
+    "slug": "showroom-bb-italia",
+    "title": "B&B Italia 쇼룸",
+    "category": "showroom",
+    "year": 2026,
+    "location": "현대백화점 무역센터점",
+    "summary": "B&B Italia와 Maxalto, Azucena를 함께 소개하는 쇼룸. 가구의 실루엣과 패브릭의 결이 정확히 읽히도록 세로 구도로 기록했습니다.",
+    "featured": false
+  },
+  {
     "slug": "showroom-duomo-lighting",
     "title": "Duomo Lighting 쇼룸",
     "category": "showroom",

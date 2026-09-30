@@ -10,9 +10,10 @@ const q = (s) => `"${String(s).replace(/"/g, '\\"')}"`;
 let n = 0;
 for (const [i, m] of meta.entries()) {
   const s = projects.find((p) => p.slug === m.slug);
-  if (!s) throw new Error(`scrape.json에 없음: ${m.slug}`);
+  const year = m.year ?? s?.year;
+  if (!year) throw new Error(`연도 없음: ${m.slug}`);
   const fm = [
-    `title: ${q(m.title)}`, `category: ${m.category}`, `year: ${s.year}`,
+    `title: ${q(m.title)}`, `category: ${m.category}`, `year: ${year}`,
     m.location ? `location: ${q(m.location)}` : null,
     `summary: ${q(m.summary)}`, notes[m.slug] ? `note: ${q(notes[m.slug])}` : null, `cover: ${q(m.cover ?? 'cover.jpg')}`,
     `featured: ${!!m.featured}`, `order: ${i + 1}`,
