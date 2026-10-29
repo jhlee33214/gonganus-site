@@ -1,5 +1,14 @@
 [
   {
+    "slug": "apt-namdong",
+    "title": "남동구 아파트",
+    "category": "residence",
+    "year": 2026,
+    "location": "인천 남동구",
+    "summary": "인천 남동구 아파트 인테리어. 우물천장의 간접 조명과 밝은 마루, 창밖 전망이 이어지는 거실을 중심으로 집 전체를 기록했습니다.",
+    "featured": false
+  },
+  {
     "slug": "showroom-bb-italia",
     "title": "B&B Italia 쇼룸",
     "category": "showroom",

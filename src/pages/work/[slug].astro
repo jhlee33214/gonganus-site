@@ -63,8 +63,8 @@ const jsonLd = [{
       </aside>
       <div class:list={['grid', { portrait }]}>
         {images.map((img, n) => (
-          <button class="cell" type="button" data-open={n} aria-label={`${d.title} 사진 ${n + 1} 크게 보기`} data-reveal="wipe">
-            <Image src={img.image} alt={`${d.title} 공간 사진 ${n + 1}`} widths={[480, 960]} sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 22vw" width={960} height={portrait ? 1280 : 720} loading={n < 6 ? 'eager' : 'lazy'} />
+          <button class:list={['cell', { wide: portrait && img.image.width > img.image.height }]} type="button" data-open={n} aria-label={`${d.title} 사진 ${n + 1} 크게 보기`} data-reveal="wipe">
+            <Image src={img.image} alt={`${d.title} 공간 사진 ${n + 1}`} widths={[480, 960]} sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 22vw" width={portrait && img.image.width > img.image.height ? 1440 : 960} height={portrait && img.image.width > img.image.height ? 960 : portrait ? 1280 : 720} loading={n < 6 ? 'eager' : 'lazy'} />
             <span class="idx">{String(n + 1).padStart(2, '0')}</span>
           </button>
         ))}
@@ -159,7 +159,11 @@ const jsonLd = [{
   .cell img { width: 100%; height: 100%; object-fit: cover; transition: transform 1s var(--ease); will-change: transform; }
   .cell:hover img { transform: scale(1.025); }
   .grid.portrait { grid-template-columns: repeat(4, 1fr); }
-  .grid.portrait .cell { aspect-ratio: 3 / 4; }
+  /* 세로 위주 촬영본: 줄 높이를 열 너비 x 4/3 으로 고정해 가로 사진(두 칸)과 세로 사진의 아래 선을 맞춘다 */
+  :global(.container:has(> .grid.portrait)) { container-type: inline-size; }
+  .grid.portrait { --cols: 4; --gap: 14px; grid-auto-flow: dense; grid-auto-rows: calc((100cqw - (var(--cols) - 1) * var(--gap)) / var(--cols) * 4 / 3); }
+  .grid.portrait .cell { aspect-ratio: auto; height: 100%; }
+  .grid.portrait .cell.wide { grid-column: span 2; }
   .cell .idx { position: absolute; left: 10px; bottom: 8px; font-size: 11px; letter-spacing: .06em; color: #fff; opacity: 0; transition: opacity .4s var(--ease); text-shadow: 0 1px 2px rgba(0,0,0,.4); }
   .cell:hover .idx { opacity: .9; }
   .cover { overflow: hidden; background: var(--soft); }
@@ -188,6 +192,6 @@ const jsonLd = [{
   .right { text-align: right; }
   @media (max-width: 1024px) { .layout { grid-template-columns: 1fr; gap: 32px; } .sticky { position: static; } }
   @media (max-width: 768px) { .v-nav { display: none; } .v-img { padding: 0; } .v-strip img { width: 56px; height: 42px; } }
-  @media (max-width: 1024px) { .grid.portrait { grid-template-columns: repeat(3, 1fr); } }
-  @media (max-width: 640px) { .grid, .grid.portrait { grid-template-columns: repeat(2, 1fr); gap: 10px; } .cover { aspect-ratio: 4 / 5; } }
+  @media (max-width: 1024px) { .grid.portrait { grid-template-columns: repeat(3, 1fr); --cols: 3; } }
+  @media (max-width: 640px) { .grid, .grid.portrait { grid-template-columns: repeat(2, 1fr); gap: 10px; } .grid.portrait { --cols: 2; --gap: 10px; } .cover { aspect-ratio: 4 / 5; } }
 </style>

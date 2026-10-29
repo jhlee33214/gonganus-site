@@ -8,5 +8,5 @@ note: "베이지 톤의 벽과 따뜻한 트랙 조명, 브랜드 로고가 들�
 cover: "cover.jpg"
 coverPosition: "50% 50%"
 featured: true
-order: 1
+order: 2
 ---
